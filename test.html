@@ -1,0 +1,38 @@
+<div id="formContainer" class="w-full max-w-sm mx-auto">
+    <!-- Buttons to toggle -->
+    <div class="flex justify-center space-x-4 mb-4">
+      <button id="showLogin" class="px-4 py-2 bg-gray-200 rounded">Log In</button>
+      <button id="showSignUp" class="px-4 py-2 bg-gray-200 rounded">Sign Up</button>
+    </div>
+  
+    <!-- Log In Form -->
+    <form id="loginForm" class="hidden">
+      <h2 class="text-xl font-bold mb-4">Log In</h2>
+      <input type="email" placeholder="Email" class="mb-4 block w-full p-2 border rounded" />
+      <input type="password" placeholder="Password" class="mb-4 block w-full p-2 border rounded" />
+      <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Log In</button>
+    </form>
+  
+    <!-- Sign Up Form -->
+    <form id="signUpForm" class="">
+      <h2 class="text-xl font-bold mb-4">Sign Up</h2>
+      <input type="text" placeholder="Username" class="mb-4 block w-full p-2 border rounded" />
+      <input type="email" placeholder="Email" class="mb-4 block w-full p-2 border rounded" />
+      <input type="password" placeholder="Password" class="mb-4 block w-full p-2 border rounded" />
+      <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Sign Up</button>
+    </form>
+  </div>
+  
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const signUpForm = document.getElementById('signUpForm');
+    document.getElementById('showLogin').addEventListener('click', () => {
+      loginForm.classList.remove('hidden');
+      signUpForm.classList.add('hidden');
+    });
+    document.getElementById('showSignUp').addEventListener('click', () => {
+      signUpForm.classList.remove('hidden');
+      loginForm.classList.add('hidden');
+    });
+  </script>
+  
