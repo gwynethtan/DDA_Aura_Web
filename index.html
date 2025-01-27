@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beyond Borders</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    
+    <body class="bg-gray-100 font-sans t">
+        <!-- Header Section -->
+        <div class="bg-blue-600 text-white py-4 text-center">
+            <h1 class="text-3xl font-bold">Beyond Borders</h1>
+            <p class="text-xl">user accounts</p>
+        </div>
+
+        <!-- Player Form Section -->
+        <div id="signUpForm" class="container mx-auto my-8 p-6 bg-white shadow-md rounded-lg">
+            <h2 class="text-2xl font-semibold mb-4">Sign up</h2>
+            <form class="space-y-4">
+                <div>
+                    <label for="username" class="block text-lg font-medium">Username:</label>
+                    <input type="text" id="username" name="username" class="w-full p-3 border rounded-md" required>
+                </div>
+                <div>
+                    <label for="email" class="block text-lg font-medium">Email:</label>
+                    <input type="email" id="email" name="email" class="w-full p-3 border rounded-md" required>
+                </div>
+                <div>
+                    <label for="password" class="block text-lg font-medium">Password:</label>
+                    <input type="password" id="password" name="password" class="w-full p-3 border rounded-md" required>
+                </div>
+                <h2 id="formError" class="text-2s font-normal mb-4 currentColor:bg-red-500">No errors detected</h2>
+                <button id="signUpButton" type="submit" class="w-full bg-blue-600 text-white py-3 rounded-md">Sign up</button>
+                
+                <div class="items-center">
+                    <h2 class="inline text-2s font-normal">Already have an account? </h2>
+                    <button id="showLogin" type="button" class="inline underline ml-2 text-blue-500 center">Log in.</button>
+                </div>
+                
+            </form>
+        </div>
+
+
+        <!-- Login Section -->
+        <div id="loginForm" class="container mx-auto my-8 p-6 bg-white shadow-md rounded-lg hidden">
+            <h2 class="text-2xl font-semibold mb-4">Log in</h2>
+            <form class="space-y-4">
+                <div>
+                    <label for="email" class="block text-lg font-medium">Email:</label>
+                    <input type="email" id="email" name="email" class="w-full p-3 border rounded-md" required>
+                </div>
+                <div>
+                    <label for="password" class="block text-lg font-medium">Password:</label>
+                    <input type="password" id="password" name="password" class="w-full p-3 border rounded-md" required>
+                </div>
+                <h2 id="formError" class="text-2s font-normal mb-4 currentColor:bg-red-500">No errors detected</h2>
+                <button id="logInButton" type="submit" class="w-full bg-blue-600 text-white py-3 rounded-md">Log in</button>
+                
+                <div class="items-center">
+                    <h2 class="inline text-2s font-normal">Don't have an account? </h2>
+                    <button id="showSignUp" type="button" class="inline underline ml-2 text-blue-500 center">Sign up.</button>
+                </div>
+                
+            </form>
+        </div>
+        
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script type="module">
+
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+            import { getDatabase, ref, get, set,query,limitToFirst,limitToLast,orderByChild,equalTo} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+            import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+              apiKey: "AIzaSyDbN7jCv9kMZZaJIV9gm9R-dpZmcYYj0-s",
+              authDomain: "dda-aura-database.firebaseapp.com",
+              databaseURL: "https://dda-aura-database-default-rtdb.asia-southeast1.firebasedatabase.app",
+              projectId: "dda-aura-database",
+              storageBucket: "dda-aura-database.firebasestorage.app",
+              messagingSenderId: "891920213301",
+              appId: "1:891920213301:web:a7c2edd2d563a00011987c"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const db = getDatabase(app);
+            const auth = getAuth(app);
+            const usersRef = ref(db, "users");
+
+            // sign up
+            document.getElementById("signUpButton").addEventListener("click", function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                alert("hi");
+                const username = document.getElementById("username").value;
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+
+                if (username == "") {
+                    alert("Please enter a username");
+                    return;
+                }
+
+                if (email == "") {
+                    alert("Please enter an email");
+                    return;
+                }
+
+                if (password == "") {
+                    alert("Please enter a 6-character password");
+                    return;
+                }
+
+                createUserWithEmailAndPassword(auth,email, password)
+                    .then((userCredential) => {
+                        // User successfully created
+                        const user = userCredential.user;
+                        alert(user);
+                        // Save additional user details in Realtime Database
+                        const newPlayerRef = ref(db, 'users/' + user.uid); // Use UID as a unique identifier
+
+                        return set(newPlayerRef,{// Use the correct database reference
+                            userDetails: {
+                                username: username,
+                                email: email,
+                                isAdmin: false,
+                                dateCreated: Date.now(),
+                                playerOnline: true,
+                                profilePhoto: "https://pnghq.com/wp-content/uploads/pnghq.com-default-pfp-png-with-vibr-4.png",
+                                aura: 0
+                            },
+                            imagesTaken: {
+                                url: ""
+                            },
+                            commentDetails: {
+                                comment: "",
+                                commentLikes: 0
+                            }
+                        });
+                    })
+                    .then(() => {
+                        alert("Player added successfully!");
+                    })
+                    .catch((error) => {
+                        console.error("Error during sign-up or database operation:", error);
+                        alert("Failed to sign up  SKIIIIII: " + error.message);
+                    });
+
+            });
+
+
+
+
+
+            //Log in 
+            document.getElementById("logInButton").addEventListener("click", function(event) {
+                event.preventDefault(); 
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+                alert("hi");
+                signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    alert("Login successful");
+
+                    //window.location.href = "home.html"; // Replace with the desired URL
+
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert("Login failed: " + errorMessage);
+                });
+            });
+
+            
+
+            // Function to handle logout
+            function logout() {
+                signOut(auth).then(() => {
+                    alert("Logout successful");
+                });
+            }
+
+
+            //Login and sign up form 
+            const loginForm = document.getElementById('loginForm');
+            const signUpForm = document.getElementById('signUpForm');
+            document.getElementById('showLogin').addEventListener('click', () => {
+                loginForm.classList.remove('hidden');
+                signUpForm.classList.add('hidden');
+                console.log("hi");
+            });
+            document.getElementById('showSignUp').addEventListener('click', () => {
+                signUpForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+            });
+        </script>
+    </body>
+</html>
