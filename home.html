@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Beyond Borders</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.css" rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.js"></script>
-        <script src="https://cdn.tailwindcss.com"></script>
+      <title>Beyond Borders</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+      <link href="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.css" rel="stylesheet" />
+      <script src="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.js"></script>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link rel="stylesheet" href="https://unpkg.com/normalize.css">
     </head>
     
     <nav class="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 sticky top-0 z-50">
@@ -91,26 +92,26 @@
 
 <div id="default-carousel" class="relative w-full h-screen" data-carousel="slide">
     <!-- Carousel wrapper -->
-    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+    <div class="relative h-screen overflow-hidden rounded-lg md:h-screen">
          <!-- Item 1 -->
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-1.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+            <img src="/DDA_Aura_Web/images/yepImg1.png" class="absolute block w-full  h-full object-contain;" alt="...">
         </div>
         <!-- Item 2 -->
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-2.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+            <img src="/DDA_Aura_Web/images/yepImg2.png" class="absolute block w-full h-full object-contain" alt="...">
         </div>
         <!-- Item 3 -->
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-3.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+            <img src="/DDA_Aura_Web/images/yepImg3.png" class="absolute block w-full h-full object-contain" alt="...">
         </div>
         <!-- Item 4 -->
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-4.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+            <img src="/DDA_Aura_Web/images/yepImg4.png" class="absolute block w-full h-full object-contain" alt="...">
         </div>
         <!-- Item 5 -->
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-5.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+            <img src="/DDA_Aura_Web/images/yepImg5.png" class="absolute block w-full h-full object-contain" alt="...">
         </div>
     </div>
     <!-- Slider indicators -->
@@ -152,14 +153,66 @@
             <canvas id="my-chart"></canvas>
         </div>
 
-        <!-- Player List Section -->
-        <div class="container mx-auto my-8 p-4 bg-white shadow-md rounded-lg">
-            <ul id="users" class="space-y-4">
-                <!-- Player data will be dynamically injected here -->
-            </ul>
+        
         </div>
 
+        <button id="sortAura" type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Filter by Aura</button>
+        <button id="sortLikes" type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Filter by Likes</button>
+        <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">See charts</button>
+
+
+        <div id="competitiveData" class="mx-2 mb-10 md:mx-14">
+          <!-- Header Row -->
+          <div class="grid grid-cols-6 gap-2 px-4 py-2 font-semibold border-b">
+            <div class="text-left">Rank</div>
+            <div class="text-left col-span-3">Username</div>
+            <div class="text-left">Aura</div>
+            <div class="text-left">Likes</div>
+          </div>
+
+          <div id="rankContainer">
+          <!-- Ranking Entries -->
+            <div class="space-y-2 mt-3">
+              <div class="grid grid-cols-6 gap-2 items-center py-2 px-4 bg-blue-200 rounded-lg shadow-md">
+                <div class="text-left">1</div>
+                <div class="text-left flex items-center whitespace-nowrap col-span-3">
+                  <img class="w-8 h-8 rounded-full" src="/DDA_Aura_Web/images/pfp.jpeg" />
+                  <span class="pl-2">gwynethtann</span>
+                </div>
+                <div class="text-left">0</div>
+                <div class="text-left">45</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        
+
+        <footer class="bg-white dark:bg-gray-900">
+          <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+              <div class="md:flex md:justify-between">
+                <div class="mb-6 md:mb-0">
+                    <a href="https://flowbite.com/" class="flex items-center">
+                        <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" />
+                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+                    </a>
+                </div>
+                
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.
+                </span>
+            </div>
+          </div>
+        </footer>
+
+        
+
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script type="module" src="/DDA_Aura_Web/jsFiles/home.js"></script>
         
         <script type="module">
             // Import the functions you need from the SDKs you need
@@ -185,78 +238,44 @@
             const usersRef = ref(db, "users");
             const top5Query = query(usersRef, orderByChild('aura'), limitToLast(5));
 
+
             const canvas = document.getElementById("my-chart");
-            const myChart = new Chart(canvas, {
-            type: "bar",
-            data: {
-                labels: [],
-                datasets: [{ label: "Top 5 player scores" }],
-            },
-            });
+      const myChart = new Chart(canvas, {
+      type: "bar",
+      data: {
+          labels: [],
+          datasets: [{ label: "Top 5 player scores" }],
+      },
+      });
 
-            get(top5Query).then((snapshot) => {
-            if (snapshot.exists()) {
-                myChart.data.labels = [];
-                myChart.data.datasets[0].data = [];
+      get(top5Query).then((snapshot) => {
+      if (snapshot.exists()) {
+          myChart.data.labels = [];
+          myChart.data.datasets[0].data = [];
 
-                snapshot.forEach((childSnapshot) => {
-                const leaderboardUser = childSnapshot.val();
-                const name = leaderboardUser.username;
-                const aura = Number(leaderboardUser.aura);
+          snapshot.forEach((childSnapshot) => {
+          const leaderboardUser = childSnapshot.val();
+          const name = leaderboardUser.userDetails.username;
+          const aura = Number(leaderboardUser.userDetails.aura);
 
-                if (name && !isNaN(aura)) {
-                    myChart.data.labels.push(name);
-                    myChart.data.datasets[0].data.push(aura);
-                } else {
-                    console.log("Invalid player data:", leaderboardUser);
-                }
-                });
+          if (name && !isNaN(aura)) {
+              myChart.data.labels.push(name);
+              myChart.data.datasets[0].data.push(aura);
+          } else {
 
-                myChart.update();
-            } else {
-                console.log("No data available");
-                document.getElementById("no-data").innerHTML = "No data available";
-            }
-            }).catch((error) => {
-            console.log("Error fetching data:", error);
-            });
+          }
+          });
 
-            // Function to get and display players from Firebase
-            function getUserData() {
-                get(usersRef).then((snapshot) => {
-                    if (snapshot.exists()) {
-                        try {
-                            document.getElementById("users").innerHTML = ''; // Clear existing list
-                            snapshot.forEach((child) => {
-                                const username = child.val().userDetails.username;
-                                const email = child.val().userDetails.email;
-                                const aura = child.val().userDetails.aura;
+          myChart.update();
+      } else {
+          console.log("No data available");
+          document.getElementById("no-data").innerHTML = "No data available";
+      }
+      }).catch((error) => {
+      console.log("Error fetching data:", error);
+      });
 
-                                document.getElementById("users").innerHTML += 
-                                `<li class="bg-gray-50 p-4 rounded-md shadow-sm">
-                                    <div class="font-semibold text-lg">Username: ${username}</div>
-                                    <div class="text-blue-600">Email: ${email}</div>
-                                    <div class="text-green-500">Aura: ${aura}</div>
-                                </li>`;
-                            });
-                        } catch (error) {
-                            console.log(error);
-                            document.getElementById("users").innerHTML += 
-                            `<li class="text-red-500">Error loading user data</li>`;
-                        }
-                    } else {
-                        document.getElementById("users").innerHTML += 
-                        `<li class="text-red-500">No user data available</li>`;
-                    }
-                }).catch((error) => {
-                    console.error(error);
-                    document.getElementById("users").innerHTML += 
-                    `<li class="text-red-500">Error fetching data from database</li>`;
-                });
-            }
-
-            // Load initial player data
-            getUserData();
+            
         </script>
     </body>
 </html>
