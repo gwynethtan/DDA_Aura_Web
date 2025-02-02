@@ -4,7 +4,7 @@ const supabaseAnonKey =
 const client = supabase.createClient(supabaseUrl, supabaseAnonKey);
 import { firebaseUpload } from "/DDA_Aura_Web/jsFiles/firebase.js";
 
-document.getElementById("uploadButton").addEventListener("click", uploadFile);
+document.getElementById("uploadButton").addEventListener("click", () =>uploadFile());
 
 async function uploadFile() {
     // Get the file element in the HTML 
@@ -19,19 +19,19 @@ async function uploadFile() {
         return; 
     } 
     else{
-      // Make a unique file name by prefixing it with the timestamp 
-      const fileName = `${Date.now()}-${file.name}`;
+      const fileName = `${Date.now()}-${file.name}`; // Make a unique file name by prefixing it with the timestamp 
+      const filePath = `profilePhotos/${fileName}`; // Path to store the file in the profilePhoto folder
 
       // Upload the file to Supabase 
       const { data, error } = await client.storage 
           .from('images')
-          .upload(fileName, file); 
+          .upload(filePath, file); 
     
       if (error) {
         alert("Upload failed:", error);
         return;
       }
-      const publicUrlData = client.storage.from("images").getPublicUrl(fileName);
+      const publicUrlData = client.storage.from("images").getPublicUrl(filePath);
       const publicUrl = publicUrlData.data.publicUrl;
       firebaseUpload(publicUrl);
     }

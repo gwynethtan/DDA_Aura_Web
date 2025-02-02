@@ -14,15 +14,15 @@ const webcam = document.getElementById("webcam");
 
 // When the capture button is clicked, call capturePhoto() function
 const startWebcamButton = document.getElementById("startWebcamButton");
-startWebcamButton.addEventListener("click", startWebcam);
+startWebcamButton.addEventListener("click", () =>startWebcam());
 
 // When the capture button is clicked, call capturePhoto() function
 const stopWebcamButton = document.getElementById("stopWebcamButton");
-stopWebcamButton.addEventListener("click", stopWebcam);
+stopWebcamButton.addEventListener("click", () =>stopWebcam());
 
 // When the capture button is clicked, call capturePhoto() function
 const captureButton = document.getElementById("captureButton");
-captureButton.addEventListener("click", capturePhoto);
+captureButton.addEventListener("click", () =>capturePhoto());
 
 // When the upload button is clicked, call firebaseUpload() function
 const uploadButton = document.getElementById("uploadButton");
@@ -71,13 +71,14 @@ async function capturePhoto() {
  
     // Create a unique file name 
     // Can use GUID too 
-    const fileName = `webcam/${Date.now()}.png`;
+    const fileName = `${Date.now()}`; // Make a unique file name by prefixing it with the timestamp 
+    const filePath = `profilePhotos/${fileName}`; // Path to store the file in the profilePhoto folder
  
     try { 
         // Upload to Supabase Storage 
         const { data, error } = await client.storage 
             .from("images") // Replace 'images' with your bucket name 
-            .upload(fileName, blob); 
+            .upload(filePath, blob); 
  
         if (error) { 
             throw error; 
@@ -86,7 +87,7 @@ async function capturePhoto() {
         // Get public URL 
         const publicUrlData = client.storage 
             .from("images") // Replace 'images' with your bucket name 
-            .getPublicUrl(fileName); 
+            .getPublicUrl(filePath); 
  
         publicUrl = publicUrlData.data.publicUrl; 
  
