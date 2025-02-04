@@ -7,4 +7,4 @@ sortAuraButton.addEventListener("click", () =>rankData("aura"));
 const sortLikesButton = document.getElementById("sortLikes");
 sortLikesButton.addEventListener("click", () =>rankData("thoughtLikes"));      
       
-rankData("thoughtLikes");
+rankData("aura");
