@@ -14,7 +14,6 @@ const signUpForm = document.getElementById('signUpForm');
 document.getElementById('showLogin').addEventListener('click', () => {
     loginForm.classList.remove('hidden');
     signUpForm.classList.add('hidden');
-    console.log("hi");
 });
 document.getElementById('showSignUp').addEventListener('click', () => {
     signUpForm.classList.remove('hidden');
