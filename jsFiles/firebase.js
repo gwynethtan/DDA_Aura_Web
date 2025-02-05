@@ -1,5 +1,5 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-    import { getDatabase,update,onValue,remove,push, ref, get, set,query,limitToFirst,limitToLast,orderByChild,equalTo} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+    import { getDatabase,update,onValue,remove,push, ref, get, set,query,limitToFirst,limitToLast,orderByChild,equalTo,runTransaction} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut ,sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
     const firebaseConfig = {
@@ -58,7 +58,7 @@
                     userDetails: {
                         username: username,
                         email: email,
-                        dateCreated: Date.now(),
+                        dateCreated: Math.floor(Date.now() / 1000),
                         playerOnline: true,
                         profilePhoto: "https://pnghq.com/wp-content/uploads/pnghq.com-default-pfp-png-with-vibr-4.png",
                         
@@ -67,7 +67,9 @@
                     },
                     thoughtDetails: {
                         thought: "",
-                        
+                        dateWritten:0,
+                        likedThoughts: {}
+                    
                     }
                 });
             })
@@ -83,8 +85,16 @@
     };
 
 
-
-
+    function dateConvert(unixTimestamp){
+        const date = new Date(unixTimestamp * 1000); // Convert to milliseconds
+        // Format to DD/MM/YY
+        const formattedDate = date.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "2-digit",
+        });
+        return formattedDate;
+    }
 
     //Log in 
     export async function logIn(){
@@ -153,15 +163,12 @@
          const rankRef = ref(db, 'users/' + currentUserId );    
          const detailsRef = ref(db, 'users/' + currentUserId + '/userDetails');
          const thoughtRef = ref(db, 'users/' + currentUserId + '/thoughtDetails');
-         console.log('rankRef:', rankRef.toString());
-
          get(rankRef)
             .then((snapshot) => {
                 if (snapshot.exists()) {
-                    console.log(snapshot);
                     const rankedData = snapshot.val();
                     document.getElementById("accountAura").textContent = `${rankedData.aura}`;
-                    document.getElementById("accountLikes").textContent = `${rankedData.thoughtLikes} likes`;
+                    document.getElementById("accountLikes").textContent = `${rankedData.thoughtLikes}`;
                 } else {
                     //console.log("No data available for the user.");
                 }
@@ -174,9 +181,11 @@
                 .then((snapshot) => {
                     if (snapshot.exists()) {
                         const userData = snapshot.val();
+                        var date=dateConvert(userData.dateCreated); //Convert into DD/MM/YY
                         document.getElementById("accountPhoto").src = `${userData.profilePhoto}`;
                         document.getElementById("accountUsername").textContent = `${userData.username}`;
                         document.getElementById("accountEmail").textContent = `${userData.email}`;
+                        document.getElementById("accountDate").textContent = `${date}`;
                     } else {
                         //console.log("No data available for the user.");
                     }
@@ -189,13 +198,15 @@
                 .then((snapshot) => {
                     if (snapshot.exists()) {
                         const thoughtData = snapshot.val();
-                        //document.getElementById("accountThought").textContent = `${thoughtData.thought}`;
+                        if(thoughtData.thought!=""){
+                            document.getElementById("accountThought").textContent = `${thoughtData.thought}`;
+                        }
                     } else {
-                        //console.log("No thought data available for the user."); 
+                        console.log("No thought data available for the user."); 
                     }
                 })
                 .catch((error) => {
-                    //console.error("Error fetching thought data:", error);  
+                    console.error("Error fetching thought data:", error);  
                 });
         } 
 
@@ -216,17 +227,16 @@
         });
     }
 
-    // Used to append the posts that the user itself liked
-    export async function appendData(node,data,newData) {
-        const userRef = ref(db, 'users/' + currentUserId +'/'+node+'/'+data);
-    
-        push(userRef, newData)
-        .then(() => {
-            alert("Data updated successfully!");
-        })
-        .catch((error) => {
-            console.error("Error updating data:", error);
-        });
+
+    export async function appendData(node, data, newNode,newValue) {
+        const arrayRef = ref(db, 'users/' + currentUserId + '/' + node +'/' + data);
+        const newKeyValuePair = {
+            [newNode]: newValue
+          };
+          
+          update(arrayRef, newKeyValuePair) 
+            .then(() => console.log("Data added successfully"))
+            .catch((error) => console.error("Error:", error));
     }
 
     // Used to update post likes for the creator
@@ -260,6 +270,17 @@
     
     }
 
+    export async function deleteData(node,subNode,data) {
+        const deleteRef = ref(db, 'users/' + currentUserId + '/' + node +'/' + subNode +'/' + data);
+        remove(deleteRef)
+        .then(() => {
+            console.log("Data updated successfully!");
+        })
+        .catch((error) => {
+            console.error("Error updating data:", error);
+        });
+    }
+
     // Insert image url into firebase
     export async function firebaseUpload(urlUpload)  {
         alert('Upload success. The url is '+urlUpload); 
@@ -281,39 +302,43 @@
                 const userUsername = data[userId]?.userDetails?.username;
                 const userPhoto = data[userId]?.userDetails?.profilePhoto;
                 const userThought = data[userId]?.thoughtDetails?.thought;
+                const userDate = dateConvert(data[userId]?.thoughtDetails?.dateWritten); //Convert into DD/MM/YY
                 const userThoughtLikes = data[userId]?.thoughtLikes;
-                document.getElementById("thoughtContainer").innerHTML+=`
-                      <div class="mx-3">
-                        <div class="max-w-sm pt-4 pb-5 px-3 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 relative">
-                            <div class="relative -top-7 -left-8 flex items-center">
-                                <img
-                                id="userPhoto"
-                                class="w-16 h-16 rounded-full cursor-pointer object-cover border-4 border-white shadow-md sm:w-20 sm:h-20"
-                                src=${userPhoto}
-                                alt="User dropdown"
-                                />
-                                <span id="userName" class="text-white font-bold inline-block pt-5 pl-4 md:text-xl sm:text-lg">${userUsername}</span>
-                            </div>
-                            <p class="text-white text-xs md:text-base text-justify relative -top-3">
-                                ${userThought}
-                            </p>
+                if (userThought!=""){
+                    document.getElementById("thoughtContainer").innerHTML+=`
+                    <div class="mx-3">
+                      <div class="max-w-sm pt-4 pb-5 px-3 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 relative">
+                          <div class="relative -top-7 -left-8 flex items-center">
+                              <img
+                              id="userPhoto"
+                              class="w-16 h-16 rounded-full cursor-pointer object-cover border-4 border-white shadow-md sm:w-20 sm:h-20"
+                              src=${userPhoto}
+                              alt="User dropdown"
+                              />
+                              <span id="userName" class="text-white font-bold inline-block pt-5 pl-4 md:text-xl sm:text-lg">${userUsername}</span>
+                          </div>
+                          <p class="text-white text-xs md:text-base text-justify relative -top-3">
+                              ${userThought}
+                          </p>
 
-                            <div class="flex justify-between pt-2">
-                                <p class="text-white text-sm font-bold">13/05/23</p>
-                                <div data-thought-id="${userId}">
-                                    <img
-                                    type="button"
-                                    class="likeButton w-5 h-5 cursor-pointer object-cover inline-block"
-                                    src="/DDA_Aura_Web/images/heartEmpty.png"
-                                    alt="User dropdown"
-                                    />
-                                    <p class="likesCount text-white text-sm font-bold inline-block pl-2">${userThoughtLikes}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                
-                `
+                          <div class="flex justify-between pt-2">
+                              <p class="text-white text-sm font-bold">${userDate}</p>
+                              <div data-thought-id="${userId}">
+                                  <img
+                                  type="button"
+                                  class="likeButton w-5 h-5 cursor-pointer object-cover inline-block"
+                                  src="/DDA_Aura_Web/images/heartEmpty.png"
+                                  alt="User dropdown"
+                                  />
+                                  <p class="likesCount text-white text-sm font-bold inline-block pl-2">${userThoughtLikes}</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              
+              `
+                }
+
                 loadUserLikedPosts();
                 
               });
@@ -327,23 +352,16 @@
           });
       }
 
+    // Display the posts liked by the current user previously
     export async function loadUserLikedPosts() {
         const postsRef = ref(db, 'users/' + currentUserId + '/thoughtDetails/likedThoughts');
         console.log(currentUserId);
         onValue(postsRef, (snapshot) => {
-            const posts = snapshot.val(); // Object with unique keys
-            console.log(posts);
-            const postValues = Object.values(posts); // Extract only the values (posts)
-            console.log (postValues);
-            
-            // Assuming each post has an 'id' property, adjust based on your data structure
-            postValues.forEach(post => {
-                const thoughtId = post; // Assuming each post has an 'id' field
-                console.log(thoughtId);
-                
-                // Find the like button in the DOM
-                const likeButton = document.querySelector(`[data-thought-id="${thoughtId}"] .likeButton`);
-                console.log(likeButton);
+            const posts = snapshot.val(); 
+            const creatorUserIdList = Object.keys(posts); // Extract the creator's userId for the liked post
+            console.log(creatorUserIdList);
+            creatorUserIdList.forEach(creatorUserId => {
+                const likeButton = document.querySelector(`[data-thought-id="${creatorUserId}"] .likeButton`); //Finding like button of the post liked
                 likeButton.src = "/DDA_Aura_Web/images/heartColored.png"; // Change image to filled heart
             });
         });    
@@ -354,11 +372,12 @@
             const imageRef = ref(db, 'users/' + currentUserId + '/imageDetails');
             onValue(imageRef, (snapshot) => {
                 const image = snapshot.val(); // Object with unique keys
-                console.log(image);
                 const imageValues = Object.values(image); // Extract only the values (images)
-                console.log (postValues);
                 imageValues.forEach(image => {
-                    const imageItem = image;
+                    document.getElementById("selfTakenImagesContainer")+=`              
+                    <div>
+                        <img class="h-auto max-w-full rounded-lg" src=${image} alt="Images taken by you">
+                    </div>`
                 });
             });    
         }
