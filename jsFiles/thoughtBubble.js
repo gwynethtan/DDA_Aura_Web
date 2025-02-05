@@ -1,4 +1,4 @@
-import { loadThoughts,updateUserRankData,appendData} from "/DDA_Aura_Web/jsFiles/firebase.js";
+import { loadThoughts,updateUserRankData,appendData,deleteData} from "/DDA_Aura_Web/jsFiles/firebase.js";
 
 loadThoughts();
 
@@ -26,14 +26,14 @@ function likeClick(event) {
         button.src = "/DDA_Aura_Web/images/heartColored.png";
         likesCount++; //Increment
         likesCountElement.textContent = likesCount;
-        //likes[] // Path to filled heart image
+        appendData("thoughtDetails","likedThoughts",userId,true);
       } 
       else{
         button.src = "/DDA_Aura_Web/images/heartEmpty.png";
         likesCount-- // decrement if unliking
         likesCountElement.textContent = likesCount;
+        deleteData("thoughtDetails","likedThoughts",userId)
       }
 
       updateUserRankData(userId,"thoughtLikes",likesCount);
-      appendData("thoughtDetails","likedThoughts",userId);
   }
