@@ -256,7 +256,7 @@
           snapshot.forEach((childSnapshot) => {
           const leaderboardUser = childSnapshot.val();
           const name = leaderboardUser.userDetails.username;
-          const aura = Number(leaderboardUser.userDetails.aura);
+          const aura = Number(leaderboardUser.aura);
 
           if (name && !isNaN(aura)) {
               myChart.data.labels.push(name);
