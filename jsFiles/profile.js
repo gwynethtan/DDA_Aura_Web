@@ -1,9 +1,26 @@
-import { updateData } from "/DDA_Aura_Web/jsFiles/firebase.js";
+import { updateData,changePassword,updateRankData,deleteAccount,logOut} from "/DDA_Aura_Web/jsFiles/firebase.js";
 
-const editThoughtButton=document.getElementById("editThought")
+const editThoughtButton=document.getElementById("editThoughtButton")
 editThoughtButton.addEventListener("click",  () =>editThought());
-let textbox = document.getElementById("accountThought");
 
+const textbox = document.getElementById("accountThought");
+
+const changeUsernameButton=document.getElementById("changeUsernameButton")
+changeUsernameButton.addEventListener("click",  () =>updateData("userDetails","username",document.getElementById("newUsername").value));
+
+const changePasswordButton=document.getElementById("changePasswordButton")
+changePasswordButton.addEventListener("click",  () =>changePassword());
+
+const resetAuraButton=document.getElementById("resetAuraButton")
+resetAuraButton.addEventListener("click",  () =>updateRankData("aura",0));
+
+const logOutButton=document.getElementById("logOutButton")
+logOutButton.addEventListener("click",  () =>logOut());
+
+const deleteAccountButton=document.getElementById("deleteAccountButton")
+deleteAccountButton.addEventListener("click",  () =>deleteAccount());
+
+// Allows user to edit thought within the thought box
 function editThought() {
     if(textbox.value=="Write my thoughts"){
         textbox.value="";
@@ -28,6 +45,7 @@ function editThought() {
 
 };
 
+//Used to re adjust the size of the box
 function autoResize(textarea) {
     textarea.style.height = "auto";
     textarea.style.height = Math.min(textarea.scrollHeight, 150) + "px"; // Max height of 300px
