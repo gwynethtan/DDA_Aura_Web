@@ -1,6 +1,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
     import { getDatabase,update,onValue,remove,push, ref, get, set,query,limitToFirst,limitToLast,orderByChild,equalTo,runTransaction} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut ,sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut ,sendPasswordResetEmail,deleteUser } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDbN7jCv9kMZZaJIV9gm9R-dpZmcYYj0-s",
@@ -15,7 +15,6 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-    const imageRef = ref(db, "images");
     const auth = getAuth(app);
     const usersRef = ref(db, "users");
     var currentUserId="";
@@ -119,17 +118,32 @@
 
 
     //Reset password
-    export async function resetPassword(){
-        if (currentUserId!=null){
-            const email=currentUserId.userDetails.email;
+    export async function changePassword(){
+    
+        if (currentUserId != null) {
+            const userRef = ref(db, 'users/' + currentUserId + '/userDetails');
+    
+            try {
+                const snapshot = await get(userRef); // Wait for the data to be fetched
+                if (snapshot.exists()) {
+                    var email = snapshot.val().email;
+                    console.log("Fetched email:", email);
+                } else {
+                    console.log("No data available for the user.");
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
+        } else {
+            var email = document.getElementById("email").value; // Get email from input field
         }
-        else{
-            const email = document.getElementById("email").value; // Get the user's email from an input field
-        }
+    
+        
         
         sendPasswordResetEmail(auth, email)
         .then(() => {
             alert("Password reset email sent. Check your inbox to reset your password.");
+            window.location.href = "index.html"; // Go to home page
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -227,6 +241,22 @@
         });
     }
 
+    // Used to change data that is ranked of the user
+    export async function updateRankData(data,updatedData) {
+        const userRef = ref(db, 'users/' + currentUserId);
+        const updates = {};
+        updates['/'+data] = updatedData; 
+        console.log(updatedData);
+    
+        update(userRef, updates)
+        .then(() => {
+            alert("Data updated successfully!");
+        })
+        .catch((error) => {
+            console.error("Error updating data:", error);
+        });
+    }
+
 
     export async function appendData(node, data, newNode,newValue) {
         const arrayRef = ref(db, 'users/' + currentUserId + '/' + node +'/' + data);
@@ -258,10 +288,19 @@
   
     export async function deleteAccount() {
         const userRef = ref(db, 'users/' + currentUserId);
-    
-        remove(userRef)
+        const authUser=auth.currentUser;
+        await deleteUser(authUser)
         .then(() => {
-            console.log("Data updated successfully!");
+            console.log("Account has been deleted on auth side");
+        })
+        .catch((error) => {
+            console.error("Error updating data:", error);
+        });
+    
+        await remove(userRef)
+        .then(() => {
+            console.log("Account has been deleted on database side");
+            alert("Account has been deleted");
             window.location.href = "index.html"; // Go to sign up page
         })
         .catch((error) => {
