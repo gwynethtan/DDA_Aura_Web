@@ -58,7 +58,7 @@
                         username: username,
                         email: email,
                         dateCreated: Math.floor(Date.now() / 1000),
-                        playerOnline: true,
+                        userOnline: true,
                         profilePhoto: "https://pnghq.com/wp-content/uploads/pnghq.com-default-pfp-png-with-vibr-4.png",
                         
                     },
@@ -104,9 +104,7 @@
         .then((userCredential) => {
             const user = userCredential.user;
             alert("Login successful");
-
             window.location.href = "home.html"; // Go to home page
-
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -114,8 +112,6 @@
             alert("Login failed: " + errorMessage);
         });
     };
-
-
 
     //Reset password
     export async function changePassword(){
@@ -143,6 +139,7 @@
         sendPasswordResetEmail(auth, email)
         .then(() => {
             alert("Password reset email sent. Check your inbox to reset your password.");
+            updateData("userDetails","userOnline",false);
             window.location.href = "index.html"; // Go to home page
         })
         .catch((error) => {
@@ -165,6 +162,7 @@
     export async function logOut() {
         signOut(auth).then(() => {
             alert("Logout successful");
+            updateData("userDetails","userOnline",false);
             window.location.href = "index.html"; // Go to sign up page
         });
     }
@@ -172,8 +170,8 @@
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            // User is logged in
          currentUserId = user.uid;
+         updateData("userDetails","userOnline",true);
          const rankRef = ref(db, 'users/' + currentUserId );    
          const detailsRef = ref(db, 'users/' + currentUserId + '/userDetails');
          const thoughtRef = ref(db, 'users/' + currentUserId + '/thoughtDetails');
@@ -482,3 +480,221 @@
     }
 
 
+
+
+    export async function generateChart() {
+        const top5Aura = query(usersRef, orderByChild('aura'), limitToLast(5));
+        const top5ThoughtLikes = query(usersRef, orderByChild('thoughtLikes'), limitToLast(5));
+        
+        var totalUsers = 0;
+        var totalOnlineUsers = 0;
+        
+        var usersBelow1000Aura = 0;
+        var usersBelow7000Aura = 0;
+        var usersBelow5000Aura = 0;
+
+        var usersBelow1000ThoughtLikes = 0;
+        var usersBelow7000ThoughtLikes = 0;
+        var usersBelow5000ThoughtLikes = 0;
+    
+        const top5AuraCanvas = document.getElementById("top5AuraCanvas");
+        const top5ThoughtLikesCanvas = document.getElementById("top5ThoughtLikesCanvas");
+        const auraDistributionCanvas = document.getElementById("auraDistributionCanvas");
+        const thoughtLikesDistributionCanvas = document.getElementById("thoughtLikesDistributionCanvas");
+        const onlineCanvas = document.getElementById("onlineCanvas");
+
+        const top5AuraChart = new Chart(top5AuraCanvas, {
+            type: "bar",
+            data: {
+                labels: [],
+                datasets: [{ label: "Top 5 Player Scores", data: [] }],
+            },
+        });
+    
+        get(top5Aura).then((snapshot) => {
+            if (snapshot.exists()) {
+                top5AuraChart.data.labels = [];
+                top5AuraChart.data.datasets[0].data = [];
+    
+                snapshot.forEach((childSnapshot) => {
+                    const rankedUser = childSnapshot.val();
+                    const name = rankedUser.userDetails.username;
+                    const aura = Number(rankedUser.aura);
+    
+                    if (name && !isNaN(aura)) {
+                        top5AuraChart.data.labels.push(name);
+                        top5AuraChart.data.datasets[0].data.push(aura);
+                    }
+                });
+    
+                top5AuraChart.update();
+            } else {
+                console.log("No data available");
+                const noDataElement = document.getElementById("no-data");
+                if (noDataElement) noDataElement.innerHTML = "No data available";
+            }
+        }).catch((error) => {
+            console.log("Error fetching data:", error);
+        });
+    
+
+
+        const top5ThoughtLikesChart = new Chart(top5ThoughtLikesCanvas, {
+            type: "bar",
+            data: {
+                labels: [],
+                datasets: [{ label: "Top 5 Thought Likes", data: [] }],
+            },
+        });
+    
+        get(top5ThoughtLikes).then((snapshot) => {
+            if (snapshot.exists()) {
+                top5ThoughtLikesChart.data.labels = [];
+                top5ThoughtLikesChart.data.datasets[0].data = [];
+    
+                snapshot.forEach((childSnapshot) => {
+                    const rankedUser = childSnapshot.val();
+                    const name = rankedUser.userDetails.username;
+                    const thoughtLikes = Number(rankedUser.thoughtLikes);
+    
+                    if (name && !isNaN(thoughtLikes)) {
+                        top5ThoughtLikesChart.data.labels.push(name);
+                        top5ThoughtLikesChart.data.datasets[0].data.push(thoughtLikes);
+                    }
+                });
+    
+                top5ThoughtLikesChart.update();
+            } else {
+                console.log("No data available");
+                const noDataElement = document.getElementById("no-data");
+                if (noDataElement) noDataElement.innerHTML = "No data available";
+            }
+        }).catch((error) => {
+            console.log("Error fetching data:", error);
+        });
+
+
+        const auraDistributionChart = new Chart(auraDistributionCanvas, {
+            type: "doughnut",
+            data: {
+                labels: ["0-1000 aura", "1000-5000 aura", "5000-7000 aura"],
+                datasets: [{
+                    label: "Aura distribution",
+                    data: [0,0,0],
+                    backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)","rgb(191, 196, 99)"],
+                    hoverOffset: 4
+                }]
+            }
+        });
+        get(usersRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                snapshot.forEach((childSnapshot) => {
+                    const user = childSnapshot.val();
+                    const aura=user.aura;
+                    if (aura < 1000) {
+                        usersBelow1000Aura++;
+                    } else if (aura < 5000) {
+                        usersBelow5000Aura++;
+                    } else {
+                        usersBelow5000Aura++;
+                    }
+                });
+        
+                // Update only the data
+                auraDistributionChart.data.datasets[0].data = [usersBelow1000Aura,usersBelow7000Aura,usersBelow7000Aura];
+                auraDistributionChart.update();
+            } else {
+                console.log("No data available");
+                document.getElementById("no-data").innerHTML = "No data available";
+            }
+        }).catch((error) => {
+            console.log("Error fetching data:", error);
+        });
+
+
+
+        const thoughtLikesDistributionChart = new Chart(thoughtLikesDistributionCanvas, {
+            type: "doughnut",
+            data: {
+                labels: ["0-1000 likes", "1000-5000 likes", "5000-7000 likes"],
+                datasets: [{
+                    label: "Thought likes distribution",
+                    data: [0,0,0], // Initialize with 0 values
+                    backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)","rgb(191, 196, 99)"],
+                    hoverOffset: 4
+                }]
+            }
+        });
+
+        get(usersRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                snapshot.forEach((childSnapshot) => {
+                    const user = childSnapshot.val();
+                    const thoughtLikes = Number(user.thoughtLikes);
+                    console.log(user);
+                    if (thoughtLikes < 1000) {
+                        usersBelow1000ThoughtLikes++;
+                    } else if (thoughtLikes < 5000) {
+                        usersBelow5000ThoughtLikes++;
+                    } else {
+                        usersBelow7000ThoughtLikes++;
+                    }
+                });
+        
+                // Update only the data
+                thoughtLikesDistributionChart.data.datasets[0].data = [usersBelow1000ThoughtLikes,usersBelow5000ThoughtLikes,usersBelow7000ThoughtLikes];
+                thoughtLikesDistributionChart.update();
+            } else {
+                console.log("No data available");
+                document.getElementById("no-data").innerHTML = "No data available";
+            }
+        }).catch((error) => {
+            console.log("Error fetching data:", error);
+        });
+        
+
+        
+        const onlineChart = new Chart(onlineCanvas, {
+            type: "doughnut",
+            data: {
+                labels: ["Online users", "Offline users"],
+                datasets: [{
+                    label: "User Status",
+                    data: [0, 0], // Initialize with 0 values
+                    backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
+                    hoverOffset: 4
+                }]
+            }
+        });
+        
+        get(usersRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                snapshot.forEach((childSnapshot) => {
+                    const onlineUser = childSnapshot.val();
+                    console.log(onlineUser);
+                    totalUsers++;
+                    console.log(onlineUser.userDetails.userOnline);
+                    if (onlineUser.userDetails.userOnline) {
+                        
+                        totalOnlineUsers++;
+                    }
+                });
+        
+                // Update only the data
+                onlineChart.data.datasets[0].data = [totalOnlineUsers, totalUsers - totalOnlineUsers];
+                onlineChart.update();
+            } else {
+                console.log("No data available");
+                document.getElementById("no-data").innerHTML = "No data available";
+            }
+        }).catch((error) => {
+            console.log("Error fetching data:", error);
+        });
+        
+
+
+
+
+
+    }
+    

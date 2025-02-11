@@ -143,21 +143,42 @@
             <h1 class="text-3xl font-bold">Beyond Borders</h1>
             <p class="text-xl">user accounts</p>
         </div>
-        <div>
-            <h1>Top 5 user scores</h1>
+        
+        <div id="chartData" class="grid grid-cols-6 gap-4 px-6">
+          <div class="col-span-6 md:col-span-3 flex flex-col items-center">
+            <h1>Top 5 aura</h1>
             <div id="no-data"></div>
-            <canvas id="my-chart"></canvas>
+            <canvas id="top5AuraCanvas"></canvas>
         </div>
-
+        <div class="col-span-6 md:col-span-3 flex flex-col items-center">
+          <h1>Top 5 likes</h1>
+          <div id="no-data"></div>
+          <canvas id="top5ThoughtLikesCanvas"></canvas>
+        </div>
+        <div class="col-span-6 md:col-span-2 flex flex-col items-center">
+          <h1>Aura distribution</h1>
+          <div id="no-data"></div>
+          <canvas id="auraDistributionCanvas"></canvas>
+        </div>
+        <div class="col-span-6 md:col-span-2 flex flex-col items-center">
+          <h1>Thought likes distribution</h1>
+          <div id="no-data"></div>
+          <canvas id="thoughtLikesDistributionCanvas"></canvas>
+        </div>
+        <div class="col-span-6 md:col-span-2 flex flex-col items-center">
+          <h1 class="flex self-center">Number of users online</h1>
+          <div id="no-data"></div>
+          <canvas id="onlineCanvas"></canvas>
+        </div>
         
         </div>
 
         <button id="sortAura" type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Filter by Aura</button>
         <button id="sortLikes" type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Filter by Likes</button>
-        <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">See charts</button>
+        <button id="seeCharts" type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">See charts</button>
 
 
-        <div id="competitiveData" class="mx-2 mb-10 md:mx-14">
+        <div id="leaderboardData" class="mx-2 mb-10 md:mx-14">
           <!-- Header Row -->
           <div class="grid grid-cols-6 gap-2 px-4 py-2 font-semibold border-b">
             <div class="text-left">Rank</div>
@@ -166,20 +187,7 @@
             <div class="text-left">Likes</div>
           </div>
 
-          <div id="rankContainer">
-          <!-- Ranking Entries -->
-            <div class="space-y-2 mt-3">
-              <div class="grid grid-cols-6 gap-2 items-center py-2 px-4 bg-blue-200 rounded-lg shadow-md">
-                <div class="text-left">1</div>
-                <div class="text-left flex items-center whitespace-nowrap col-span-3">
-                  <img class="w-8 h-8 rounded-full" src="/DDA_Aura_Web/images/pfp.jpeg" />
-                  <span class="pl-2">gwynethtann</span>
-                </div>
-                <div class="text-left">0</div>
-                <div class="text-left">45</div>
-              </div>
-            </div>
-          </div>
+          <div id="rankContainer"></div>
         </div>
 
         <footer class="bg-white dark:bg-gray-900">
@@ -199,72 +207,7 @@
             </div>
           </div>
         </footer>
-
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script type="module" src="/DDA_Aura_Web/jsFiles/home.js"></script>
-        
-        <script type="module">
-            // Import the functions you need from the SDKs you need
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-            import { getDatabase, ref, get, set,query,limitToFirst,limitToLast,orderByChild,equalTo} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
-            import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-
-            // Your web app's Firebase configuration
-            const firebaseConfig = {
-              apiKey: "AIzaSyDbN7jCv9kMZZaJIV9gm9R-dpZmcYYj0-s",
-              authDomain: "dda-aura-database.firebaseapp.com",
-              databaseURL: "https://dda-aura-database-default-rtdb.asia-southeast1.firebasedatabase.app",
-              projectId: "dda-aura-database",
-              storageBucket: "dda-aura-database.firebasestorage.app",
-              messagingSenderId: "891920213301",
-              appId: "1:891920213301:web:a7c2edd2d563a00011987c"
-            };
-
-            // Initialize Firebase
-            const app = initializeApp(firebaseConfig);
-            const db = getDatabase(app);
-            const auth = getAuth(app);
-            const usersRef = ref(db, "users");
-            const top5Query = query(usersRef, orderByChild('aura'), limitToLast(5));
-
-
-            const canvas = document.getElementById("my-chart");
-      const myChart = new Chart(canvas, {
-      type: "bar",
-      data: {
-          labels: [],
-          datasets: [{ label: "Top 5 player scores" }],
-      },
-      });
-
-      get(top5Query).then((snapshot) => {
-      if (snapshot.exists()) {
-          myChart.data.labels = [];
-          myChart.data.datasets[0].data = [];
-
-          snapshot.forEach((childSnapshot) => {
-          const leaderboardUser = childSnapshot.val();
-          const name = leaderboardUser.userDetails.username;
-          const aura = Number(leaderboardUser.aura);
-
-          if (name && !isNaN(aura)) {
-              myChart.data.labels.push(name);
-              myChart.data.datasets[0].data.push(aura);
-          } else {
-
-          }
-          });
-
-          myChart.update();
-      } else {
-          console.log("No data available");
-          document.getElementById("no-data").innerHTML = "No data available";
-      }
-      }).catch((error) => {
-      console.log("Error fetching data:", error);
-      });
-
-            
-        </script>
     </body>
 </html>

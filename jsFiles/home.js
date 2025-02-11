@@ -1,10 +1,26 @@
-import { rankData } from "/DDA_Aura_Web/jsFiles/firebase.js";
+import { rankData,generateChart } from "/DDA_Aura_Web/jsFiles/firebase.js";
+const chartData = document.getElementById("chartData");
+const leaderboardData = document.getElementById("leaderboardData");
 
-const sortAuraButton = document.getElementById("sortAura");
-sortAuraButton.addEventListener("click", () =>rankData("aura"));
 
-// When the capture button is clicked, call capturePhoto() function
-const sortLikesButton = document.getElementById("sortLikes");
-sortLikesButton.addEventListener("click", () =>rankData("thoughtLikes"));      
+     
+
+document.getElementById('sortAura').addEventListener('click', () => {
+    leaderboardData.classList.remove('hidden');
+    chartData.classList.add('hidden');
+    rankData("aura")
+});
+document.getElementById('sortLikes').addEventListener('click', () => {
+    leaderboardData.classList.remove('hidden');
+    chartData.classList.add('hidden');
+    rankData("thoughtLikes")
+});
+document.getElementById('seeCharts').addEventListener('click', () => {
+    chartData.classList.remove('hidden');
+    leaderboardData.classList.add('hidden');
+});
       
 rankData("aura");
+generateChart();
+
+
