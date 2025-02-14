@@ -1,0 +1,90 @@
+.my-pink { color: #E18199; }
+.my-bg-pink { background-color: #E18199;}
+
+.my-blue { color: #08346B; }
+.my-bg-blue { background-color: #08346B;}
+
+.my-grey { color: #f7f8fc; }
+.my-bg-grey { background-color: #f7f8fc;}
+
+.my-pop-up { color: #c8c8c8; }
+.my-bg-pop-up { background-color: #c8c8c8;}
+
+.my-white { color: #FFFFFF;}
+.my-bg-white { background-color: #FFFFFF;}
+
+.page-hover:hover { color: #E18199; }
+
+.dropdown-hover:hover { background-color: #F5D7DF; }
+
+.border-color {
+  border-width: 0.5px;
+  border-style: solid;
+  border-color: #4E4949; 
+}
+
+.border-main {
+  border-width: 16px;
+  border-style: solid;
+  border-color: #08346B; 
+}
+
+
+.poppins {
+  font-family: "Poppins", serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+
+.nunito {
+  font-family: "Nunito", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+*{
+  font-family: "Nunito", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  background-image: url("../images/paper.png");
+}
+
+/* Text area */
+.transparent-input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  overflow: hidden; /* Hide scrollbars until content overflows */
+  overflow-y: auto;  /* Enable scrolling when max height is reached */
+  resize: none; /* Disable manual resizing by the user */
+  max-height: 300px; /* Set max height */
+  }
+
+/* Entire scrollbar */
+::-webkit-scrollbar {
+  margin-left:10px;
+  width: 5px; 
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
+}
+
+/* Handle (Thumb) */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px; /* Use px for better control */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+  
