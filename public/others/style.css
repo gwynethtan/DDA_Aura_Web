@@ -7,11 +7,19 @@
 .my-grey { color: #f7f8fc; }
 .my-bg-grey { background-color: #f7f8fc;}
 
-.my-pop-up { color: #c8c8c8; }
-.my-bg-pop-up { background-color: #c8c8c8;}
+.my-dark-grey{color: #ACA5A5 ;}
+.my-bg-dark-grey{background-color: #ACA5A5 ;}
 
 .my-white { color: #FFFFFF;}
 .my-bg-white { background-color: #FFFFFF;}
+
+.my-red { color: #EB0D44;}
+.my-bg-red { background-color: #EB0D44;}
+
+.my-bg-text-input{background-color: #DCDCDC;}
+.my-pop-up-text { color: #4E4949; }
+.my-bg-pop-up { background-color: #F7F8FC;}
+.my-bg-file { background-color: #E3E3E3;}
 
 .page-hover:hover { color: #E18199; }
 
