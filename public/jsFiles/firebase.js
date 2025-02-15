@@ -76,7 +76,20 @@
             })
             .catch((error) => {
                 console.error("Error during sign-up or database operation:", error);
-                alert("Failed to sign up : " + error.message);
+                const errorCode = error.code;
+                
+            
+                if (errorCode === 'auth/email-already-in-use') {
+                    alert("The email address is already in use by another account.");
+                } else if (errorCode === 'auth/invalid-email') {
+                    alert("The email address is invalid. Please check the formatting.");
+                } else if (errorCode === 'auth/weak-password') {
+                    alert("The password is too weak. Please choose a stronger password.");
+                } else if (errorCode === 'auth/operation-not-allowed') {
+                    alert("Email/password accounts are not enabled. Sign up for a new account.");
+                } else {
+                    alert("An unexpected error occurred. Please try again.");
+                }
             });
 
     };
@@ -98,47 +111,63 @@
         event.preventDefault(); 
         const email = document.getElementById("logInEmail").value;
         const password = document.getElementById("logInPassword").value;
+
+        if (email == "") {
+            alert("Please enter an email");
+            return;
+        }
+
+        if (password == "") {
+            alert("Please enter a 6-character password");
+            return;
+        }
+
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            const user = userCredential.user;
             alert("Login successful");
             window.location.href = "home.html"; // Go to home page
         })
         .catch((error) => {
-            const errorMessage = error.message;
-            alert("Login failed: " + errorMessage);
+            const errorCode = error.code;
+            if (errorCode === 'auth/user-not-found') {
+                alert("No user found with this email address.");
+            } else if (errorCode === 'auth/wrong-password') {
+                alert("Incorrect password. Please try again.");
+            } else if (errorCode === 'auth/invalid-email') {
+                alert("The email address is invalid. Please check the formatting.");
+            } else if (errorCode === 'auth/too-many-requests') {
+                alert("Too many failed login attempts. Please try again later.");
+            } else {
+                alert("An unexpected error occurred. Please try again.");
+            }
         });
     };
 
-    //Reset password
+    //Change user password when logged in
     export async function changePassword(){  
-        console.log(currentUserId);
-        if (currentUserId != "") {
-            const userRef = ref(db, 'users/' + currentUserId + '/userDetails');
-            try {
-                const snapshot = await get(userRef); // Wait for the data to be fetched
-                if (snapshot.exists()) {
-                    var email = snapshot.val().email;
-                    console.log("Fetched email:", email);
-                } else {
-                    console.log("No data available for the user.");
-                }
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            }
-        } else {
-            var email = document.getElementById("forgotPasswordEmail").value; // Get email from input field
-            console.log(currentUserId);
-            console.log(email);
+        if (email == "") {
+            alert("Please enter an email");
+            return;
         }
-    
-        
+
+        console.log(currentUserId);
+        const userRef = ref(db, 'users/' + currentUserId + '/userDetails');
+        try {
+            const snapshot = await get(userRef); // Wait for the data to be fetched
+            if (snapshot.exists()) {
+                var email = snapshot.val().email;
+                updateData("userDetails","userOnline",false);
+                console.log("Fetched email:", email);
+            } else {
+                console.log("No data available for the user.");
+            }
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+        }
         
         sendPasswordResetEmail(auth, email)
         .then(() => {
             alert("Password reset email sent. Check your inbox to reset your password.");
-            currentUserId="";
-            updateData("userDetails","userOnline",false);
             window.location.href = "index.html"; // Go to home page
         })
         .catch((error) => {
@@ -156,11 +185,9 @@
     }
 
 
-    //Reset password
+    //Change user password when logged out
     export async function resetPassword(){  
         var email = document.getElementById("forgotPasswordEmail").value; // Get email from input field
-        console.log(email);
-        
         sendPasswordResetEmail(auth, email)
         .then(() => {
             alert("Password reset email sent. Check your inbox to reset your password.");
@@ -183,9 +210,9 @@
 
     // Function to handle logout
     export async function logOut() {
+        updateData("userDetails","userOnline",false);
         signOut(auth).then(() => {
-            alert("Logout successful");
-            updateData("userDetails","userOnline",false);
+            alert("You have been logged out");
             window.location.href = "index.html"; // Go to sign up page
         });
     }
@@ -200,8 +227,8 @@
          const thoughtRef = ref(db, 'users/' + currentUserId + '/thoughtDetails');
          const imageRef = ref(db, 'users/' + currentUserId + '/imagesTaken');
 
-         get(rankRef)
-            .then((snapshot) => {
+         onValue(rankRef
+            ,(snapshot) => {
                 if (snapshot.exists()) {
                     const rankedData = snapshot.val();
                     document.getElementById("accountAura").textContent = `${rankedData.aura} aura`;
@@ -210,12 +237,10 @@
                     //console.log("No data available for the user.");
                 }
             })
-            .catch((error) => {
-                //console.error("Error fetching user data:", error);
-            });
+            
     
-            get(detailsRef)
-                .then((snapshot) => {
+            onValue(detailsRef
+                ,(snapshot) => {
                     if (snapshot.exists()) {
                         const userData = snapshot.val();
                         var date=dateConvert(userData.dateCreated); //Convert into DD/MM/YY
@@ -227,12 +252,10 @@
                         //console.log("No data available for the user.");
                     }
                 })
-                .catch((error) => {
-                    //console.error("Error fetching user data:", error);
-                });
+                
     
-            get(thoughtRef) 
-                .then((snapshot) => {
+            onValue(thoughtRef
+                ,(snapshot) => {
                     if (snapshot.exists()) {
                         const thoughtData = snapshot.val();
                         if(thoughtData.thought!=""){
@@ -242,9 +265,7 @@
                         console.log("No thought data available for the user."); 
                     }
                 })
-                .catch((error) => {
-                    console.error("Error fetching thought data:", error);  
-                });
+                
 
             onValue(imageRef, (snapshot) => {
                 const noImageDesign = document.getElementById('noImageDesign');
@@ -269,6 +290,19 @@
         } 
 
     });
+
+    export async function updateUserOnline(currentUserId, node,data,updatedData) {
+        const userRef = ref(db, 'users/' + currentUserId);
+        const updates = {};
+        updates['/'+node+'/'+data] = updatedData;     
+        update(userRef, updates)
+        .then(() => {
+            console.log("Data updated successfully!");
+        })
+        .catch((error) => {
+            console.error("Error updating data:", error);
+        });
+    }
 
     export async function updateData(node,data,updatedData) {
         const userRef = ref(db, 'users/' + currentUserId);
@@ -313,6 +347,7 @@
 
     // Used to update post likes for the creator
     export async function updateUserRankData(userId,data,updatedData) {
+        console.log("sss");
         const userRef = ref(db, 'users/' + userId);
         const updates = {};
         updates['/'+data] = updatedData; 
@@ -452,6 +487,7 @@
             const posts = snapshot.val(); 
             const creatorUserIdList = Object.keys(posts); // Extract the creator's userId for the liked post
             creatorUserIdList.forEach(creatorUserId => {
+                console.log(creatorUserId);
                 const likeButton = document.querySelector(`[data-thought-id="${creatorUserId}"] .likeButton`); //Finding like button of the post liked
                 likeButton.src = "./images/heartColored.png"; // Change image to filled heart
             });
@@ -468,7 +504,7 @@
     
         document.getElementById("rankContainer").innerHTML = ""; // Clear existing list
     
-        get(rankedQueryType).then((snapshot) => {
+        onValue(rankedQueryType,(snapshot) => {
             if (snapshot.exists()) {
                 try {
 
@@ -511,10 +547,7 @@
             } else {
                 document.getElementById("rankContainer").innerHTML += `<li class="text-red-500">No user data available</li>`;
             }
-        }).catch((error) => {
-            console.error(error);
-            document.getElementById("rankContainer").innerHTML += `<li class="text-red-500">Error fetching data from database</li>`;
-        });
+        })
     }
 
 

@@ -149,25 +149,18 @@
                     <div class="relative p-4 w-full max-w-md max-h-full">
                         <div class="relative my-bg-pop-up rounded-lg shadow-sm">
                             <button type="button" class="absolute top-3 end-2.5 my-grey bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="uploadFilePopUp">
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                </svg>
+                                <img src="images/close.png"/>
                                 <span class="sr-only">Close modal</span>
                             </button>
                             <div class="p-4 md:p-5 text-center">
-                                <svg class="mx-auto mb-4 text-white-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                </svg>
-      
-                                
-                                <label class="block mb-2 text-sm font-medium my-blue">Upload photo</label>
-                                <input class="block w-full text-sm my-blue border border-color rounded-lg cursor-pointer focus:outline-none" id="fileInput" type="file">
-      
+                                <img class="mx-auto mb-4 text-white-400 w-12 h-12" src="images/camera.png"/>
+                                <label class="block mb-2 text-sm font-semibold my-pop-up-text">Upload photo</label>
+                                <input class="block w-full text-sm my-dark-grey my-bg-file rounded-lg cursor-pointer focus:outline-none" id="fileInput" type="file">
                                 <h3 class="mb-5 text-lg font-normal text-gray-500"></h3>
-                                <button data-modal-hide="uploadFilePopUp" id="uploadButton" type="button" class="text-white my-bg-blue font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                <button data-modal-hide="uploadFilePopUp" id="uploadButton" type="button" class="text-white my-bg-pink font-semibold rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                     Upload
                                 </button>
-                                <button data-modal-hide="uploadFilePopUp" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 my-bg-pink focus:outline-none rounded-lg" >Cancel</button>
+                                <button data-modal-hide="uploadFilePopUp" type="button" class="py-2.5 px-5 ms-3 text-sm font-semibold text-white my-bg-dark-grey focus:outline-none rounded-lg">Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -175,27 +168,22 @@
       
                 <div id="webcamPopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                     <div class="relative p-4 w-full max-w-md max-h-full">
-                        <div class="relative bg-white rounded-lg shadow-sm">
+                        <div class="relative my-bg-pop-up rounded-lg shadow-sm">
                             <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="webcamPopUp">
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                </svg>
+                                <img src="images/close.png"/>
                                 <span id="stopWebcamButton" class="sr-only">Close modal</span>
                             </button>
                             <div class="p-4 md:p-5 text-center">
-                                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                </svg>
-                              
-                                <label class="block mb-2 text-sm font-medium text-gray-900">Take photo</label>
+                              <img class="mx-auto mb-4 text-white-400 w-12 h-12" src="images/camera.png"/>
+                                <label class="block mb-2 text-sm font-semibold my-pop-up-text">Take photo</label>
                                 <div id="camara" class="relative"> 
                                   <video id="webcam" autoplay playsinline class="aspect-square" width="500px" height="500px"></video> 
                                 </div>
                                                     
-                                <button id="captureButton" data-modal-hide="webcamPopUp" type="button" class="text-white my-blue font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                <button id="captureButton" data-modal-hide="webcamPopUp" type="button" class="text-white my-bg-pink font-semibold rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                   Capture
                                 </button>
-                                <button id="stopWebcamButton"  data-modal-hide="webcamPopUp" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg">Cancel</button>
+                                <button id="stopWebcamButton"  data-modal-hide="webcamPopUp" type="button" class="py-2.5 px-5 ms-3 text-sm font-semibold text-white my-bg-dark-grey focus:outline-none rounded-lg">Cancel</button>
                               </div>
                           </div>
                       </div>
@@ -204,7 +192,7 @@
   
                   <div class="inline-block pl-10">
                     <div class="flex align-center">
-                      <span id="accountUsername" class="text-white inline-block font-semibold text-3xl"></span>
+                      <span id="accountUsername" class="text-align text-white inline-block font-semibold text-lg md:text-3xl"></span>
 
                       <img
                       id="accountSettings"
@@ -242,7 +230,7 @@
                                 Log out
                             </button>
                           </li>
-                          <li class="block font-semibold text-red-400 px-4 py-2 dropdown-hover"> 
+                          <li class="block font-semibold my-red px-4 py-2 dropdown-hover"> 
                             <button data-modal-target="deleteAccountPopUp" data-modal-toggle="deleteAccountPopUp" type="button">
                                 Delete account
                             </button>
@@ -252,25 +240,22 @@
                      
                       <div id="changeUsernamePopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative p-4 w-full max-w-md max-h-full">
-                            <div class="relative bg-white rounded-lg shadow-sm">
+                            <div class="relative my-bg-pop-up rounded-lg shadow-sm">
                                 <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="changeUsernamePopUp">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                    </svg>
+                                <img src="images/close.png"/>
                                     <span class="sr-only">Close modal</span>
                                 </button>
                                 <div class="p-4 md:p-5 text-center">
-                                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                    </svg>
-                                    <label class="block mb-2 text-sm font-medium text-gray-900">Change username</label>
-                                    <input id="newUsername" class="block w-full px-3 h-10 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" type="text"></input>
+                                  <img class="mx-auto mb-4 text-white-400 w-12 h-12" src="images/exclaim.png"/>
+
+                                    <label class="block mb-2 text-sm font-semibold my-pop-up-text">Change username</label>
+                                    <input id="newUsername" class="block w-full px-3 h-10 text-sm rounded-lg cursor-pointer my-pop-up-text my-bg-text-input focus:outline-none" type="text"></input>
           
                                     <h3 class="mb-5 text-lg font-normal text-gray-500"></h3>
-                                    <button data-modal-hide="changeUsernamePopUp" id="changeUsernameButton" type="button" class="text-white my-blue font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                    <button data-modal-hide="changeUsernamePopUp" id="changeUsernameButton" type="button" class="text-white my-bg-pink font-semibold rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                         Confirm
                                     </button>
-                                    <button data-modal-hide="changeUsernamePopUp" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg" >Cancel</button>
+                                    <button data-modal-hide="changeUsernamePopUp" type="button" class="py-2.5 px-5 ms-3 text-sm font-semibold text-white my-bg-dark-grey focus:outline-none rounded-lg">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -278,25 +263,22 @@
 
                       <div id="changePasswordPopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative p-4 w-full max-w-md max-h-full">
-                            <div class="relative bg-white rounded-lg shadow-sm">
+                            <div class="relative my-bg-pop-up rounded-lg shadow-sm">
                                 <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="changePasswordPopUp">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                    </svg>
+                                <img src="images/close.png"/>
                                     <span class="sr-only">Close modal</span>
                                 </button>
                                 <div class="p-4 md:p-5 text-center">
-                                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                    </svg>
-                                    <label class="block mb-2 text-sm font-medium text-gray-900">Change password</label>
-                                    <p class="block mb-2 text-sm font-normal text-gray-900">An email will be sent for you to change password. This action will send you to the sign up page.</p>
+                                  <img class="mx-auto mb-4 text-white-400 w-12 h-12" src="images/exclaim.png"/>
+
+                                    <label class="block mb-2 text-sm font-semibold my-pop-up-text">Change password</label>
+                                    <p class="block mb-2 text-xs font-semibold my-dark-grey">An email will be sent for you to change password. This action will send you to the sign up page.</p>
           
                                     <h3 class="mb-5 text-lg font-normal text-gray-500"></h3>
-                                    <button data-modal-hide="changePasswordPopUp" id="changePasswordButton" type="button" class="text-white my-blue font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                    <button data-modal-hide="changePasswordPopUp" id="changePasswordButton" type="button" class="text-white my-bg-pink font-semibold rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                         Confirm
                                     </button>
-                                    <button data-modal-hide="changePasswordPopUp" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg" >Cancel</button>
+                                    <button data-modal-hide="changePasswordPopUp" type="button" class="py-2.5 px-5 ms-3 text-sm font-semibold text-white my-bg-dark-grey focus:outline-none rounded-lg">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -304,24 +286,21 @@
 
                       <div id="resetAuraPopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative p-4 w-full max-w-md max-h-full">
-                            <div class="relative bg-white rounded-lg shadow-sm">
+                            <div class="relative my-bg-pop-up rounded-lg shadow-sm">
                                 <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="resetAuraPopUp">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                    </svg>
+                                <img src="images/close.png"/>
                                     <span class="sr-only">Close modal</span>
                                 </button>
                                 <div class="p-4 md:p-5 text-center">
-                                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                    </svg>
-                                    <label class="block mb-2 text-sm font-medium text-gray-900">Reset aura</label>
-                                    <p class="block mb-2 text-sm font-normal text-gray-900">Aura will be reset to 0 once the "Confirm" button is clicked.</p>       
+                                  <img class="mx-auto mb-4 text-white-400 w-12 h-12" src="images/exclaim.png"/>
+
+                                    <label class="block mb-2 text-sm font-semibold my-pop-up-text">Reset aura</label>
+                                    <p class="block mb-2 text-xs font-semibold my-dark-grey">Aura will be reset to 0 once the "Confirm" button is clicked.</p>       
                                     <h3 class="mb-5 text-lg font-normal text-gray-500"></h3>
-                                    <button data-modal-hide="resetAuraPopUp" id="resetAuraButton" type="button" class="text-white my-blue font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                    <button data-modal-hide="resetAuraPopUp" id="resetAuraButton" type="button" class="text-white my-bg-pink font-semibold rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                         Confirm
                                     </button>
-                                    <button data-modal-hide="resetAuraPopUp" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg" >Cancel</button>
+                                    <button data-modal-hide="resetAuraPopUp" type="button" class="py-2.5 px-5 ms-3 text-sm font-semibold text-white my-bg-dark-grey focus:outline-none rounded-lg">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -329,24 +308,20 @@
 
                       <div id="logOutPopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative p-4 w-full max-w-md max-h-full">
-                            <div class="relative bg-white rounded-lg shadow-sm">
+                            <div class="relative my-bg-pop-up rounded-lg shadow-sm">
                                 <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="logOutPopUp">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                    </svg>
+                                <img src="images/close.png"/>
                                     <span class="sr-only">Close modal</span>
                                 </button>
                                 <div class="p-4 md:p-5 text-center">
-                                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                    </svg>
-                                    <label class="block mb-2 text-sm font-medium text-gray-900">Log out</label>
-                                    <p class="block mb-2 text-sm font-normal text-gray-900">This account will be logged out once the "Confirm" button is clicked.</p>       
+                                  <img class="mx-auto mb-4 text-white-400 w-12 h-12" src="images/exclaim.png"/>
+                                    <label class="block mb-2 text-sm font-semibold my-pop-up-text">Log out</label>
+                                    <p class="block mb-2 text-xs font-semibold my-dark-grey">This account will be logged out once the "Confirm" button is clicked.</p>       
                                     <h3 class="mb-5 text-lg font-normal text-gray-500"></h3>
-                                    <button data-modal-hide="logOutPopUp" id="logOutButton" type="button" class="text-white my-blue font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                    <button data-modal-hide="logOutPopUp" id="logOutButton" type="button" class="text-white my-bg-pink font-semibold rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                         Confirm
                                     </button>
-                                    <button data-modal-hide="logOutPopUp" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg" >Cancel</button>
+                                    <button data-modal-hide="logOutPopUp" type="button" class="py-2.5 px-5 ms-3 text-sm font-semibold text-white my-bg-dark-grey focus:outline-none rounded-lg">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -354,24 +329,20 @@
 
                       <div id="deleteAccountPopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative p-4 w-full max-w-md max-h-full">
-                            <div class="relative bg-white rounded-lg shadow-sm">
+                            <div class="relative my-bg-pop-up rounded-lg shadow-sm">
                                 <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="deleteAccountPopUp">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                    </svg>
+                                <img src="images/close.png"/>
                                     <span class="sr-only">Close modal</span>
                                 </button>
                                 <div class="p-4 md:p-5 text-center">
-                                    <svg class="mx-auto mb-4 text-red-400 w-12 h-12 dark:text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                    </svg>
-                                    <label class="block mb-2 text-sm font-medium text-red-900 dark:text-red-500">Are you sure?</label>
-                                    <p class="block mb-2 text-sm font-normal text-red-900 dark:text-red-500">This change is irreversible. Click confirm to delete account.</p>
+                                  <img class="mx-auto mb-4 text-white-400 w-12 h-12" src="images/warn.png"/>
+                                    <label class="block mb-2 text-sm font-semibold my-red">Are you sure?</label>
+                                    <p class="block mb-2 text-sm text-xs font-semibold my-dark-grey">This change is irreversible. Click confirm to delete account.</p>
                                     <h3 class="mb-5 text-lg font-normal text-gray-500"></h3>
-                                    <button data-modal-hide="deleteAccountPopUp" id="deleteAccountButton" type="button" class="text-white bg-red-600 hover:bg-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                    <button data-modal-hide="deleteAccountPopUp" id="deleteAccountButton" type="button" class="text-white my-bg-red font-semibold rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                         Confirm
                                     </button>
-                                    <button data-modal-hide="deleteAccountPopUp" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg" >Cancel</button>
+                                    <button data-modal-hide="deleteAccountPopUp" type="button" class="py-2.5 px-5 ms-3 text-sm font-semibold text-white my-bg-dark-grey focus:outline-none rounded-lg">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -379,9 +350,9 @@
 
                     </div>
 
-                    <span id="accountEmail" class="block text-lg"></span>
-                    <span id="accountAura" class="block text-lg"></span>
-                    <span id="accountDate" class="block text-lg"></span>
+                    <span id="accountEmail" class="block text-sm md:text-lg"></span>
+                    <span id="accountAura" class="block text-sm md:text-lg"></span>
+                    <span id="accountDate" class="block text-sm md:text-lg"></span>
                   </div>
             </div>
 
