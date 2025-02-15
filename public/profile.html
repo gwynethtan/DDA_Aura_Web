@@ -90,12 +90,8 @@
         </div>
       </nav>
 
-
-
-
-
-        <div class="grid grid-cols-2 md:grid-cols-8 gap-8 mt-10 pb-10 px-5 md:px-10">
-          <div class="col-span-8 md:col-span-3" >
+        <div class="grid grid-cols-2 lg:grid-cols-8 gap-8 mt-10 pb-10 px-5 md:px-10">
+          <div class="col-span-8 lg:col-span-3" >
             <div class="my-bg-pink my-white rounded-lg pt-5 pb-5">
               <div class="inline-block">
                 <div class="relative pl-7 h-100">
@@ -145,18 +141,17 @@
                   </div>
                 </div>    
           
-                <div id="uploadFilePopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                    <div class="relative p-4 w-full max-w-md max-h-full">
+                <div id="uploadFilePopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full lg:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative p-1 w-full max-w-md max-h-full">
                         <div class="relative my-bg-pop-up rounded-lg shadow-sm">
                             <button type="button" class="absolute top-3 end-2.5 my-grey bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="uploadFilePopUp">
                                 <img src="images/close.png"/>
                                 <span class="sr-only">Close modal</span>
                             </button>
                             <div class="p-4 md:p-5 text-center">
-                                <img class="mx-auto mb-4 text-white-400 w-12 h-12" src="images/camera.png"/>
+                                <img class="mx-auto mb-4 w-12 h-12" src="images/camera.png"/>
                                 <label class="block mb-2 text-sm font-semibold my-pop-up-text">Upload photo</label>
-                                <input class="block w-full text-sm my-dark-grey my-bg-file rounded-lg cursor-pointer focus:outline-none" id="fileInput" type="file">
-                                <h3 class="mb-5 text-lg font-normal text-gray-500"></h3>
+                                <input class="block w-full text-sm my-dark-grey my-bg-file rounded-lg cursor-pointer mb-5 focus:outline-none" id="fileInput" type="file">
                                 <button data-modal-hide="uploadFilePopUp" id="uploadButton" type="button" class="text-white my-bg-pink font-semibold rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                     Upload
                                 </button>
@@ -166,7 +161,7 @@
                     </div>
                 </div>
       
-                <div id="webcamPopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div id="webcamPopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full lg:inset-0 h-[calc(100%-1rem)] max-h-full">
                     <div class="relative p-4 w-full max-w-md max-h-full">
                         <div class="relative my-bg-pop-up rounded-lg shadow-sm">
                             <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="webcamPopUp">
@@ -177,7 +172,7 @@
                               <img class="mx-auto mb-4 text-white-400 w-12 h-12" src="images/camera.png"/>
                                 <label class="block mb-2 text-sm font-semibold my-pop-up-text">Take photo</label>
                                 <div id="camara" class="relative"> 
-                                  <video id="webcam" autoplay playsinline class="aspect-square" width="500px" height="500px"></video> 
+                                  <video id="webcam" autoplay playsinline class="aspect-square pb-2"></video> 
                                 </div>
                                                     
                                 <button id="captureButton" data-modal-hide="webcamPopUp" type="button" class="text-white my-bg-pink font-semibold rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
@@ -238,7 +233,7 @@
                         </ul>
                       </div>
                      
-                      <div id="changeUsernamePopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                      <div id="changeUsernamePopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full lg:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative p-4 w-full max-w-md max-h-full">
                             <div class="relative my-bg-pop-up rounded-lg shadow-sm">
                                 <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="changeUsernamePopUp">
@@ -261,7 +256,7 @@
                         </div>
                       </div>
 
-                      <div id="changePasswordPopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                      <div id="changePasswordPopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full lg:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative p-4 w-full max-w-md max-h-full">
                             <div class="relative my-bg-pop-up rounded-lg shadow-sm">
                                 <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="changePasswordPopUp">
@@ -284,7 +279,7 @@
                         </div>
                       </div>
 
-                      <div id="resetAuraPopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                      <div id="resetAuraPopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full lg:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative p-4 w-full max-w-md max-h-full">
                             <div class="relative my-bg-pop-up rounded-lg shadow-sm">
                                 <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="resetAuraPopUp">
@@ -306,7 +301,7 @@
                         </div>
                       </div>
 
-                      <div id="logOutPopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                      <div id="logOutPopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full lg:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative p-4 w-full max-w-md max-h-full">
                             <div class="relative my-bg-pop-up rounded-lg shadow-sm">
                                 <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="logOutPopUp">
@@ -327,7 +322,7 @@
                         </div>
                       </div>                   
 
-                      <div id="deleteAccountPopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                      <div id="deleteAccountPopUp" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full lg:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative p-4 w-full max-w-md max-h-full">
                             <div class="relative my-bg-pop-up rounded-lg shadow-sm">
                                 <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="deleteAccountPopUp">
@@ -363,7 +358,7 @@
                 <svg class="w-10 h-10 mx-auto mb-3 my-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
                     <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z"/>
                 </svg>
-                <textarea id="accountThought" class="min-h-auto md:min-h-[186px] text-base md:text-lg text-center w-full italic font-medium text-white transparent-input resize-none" readonly>Write my thoughts</textarea>
+                <textarea id="accountThought" class="min-h-auto lg:min-h-[186px] text-base md:text-lg text-center w-full italic font-medium text-white transparent-input resize-none" readonly>Write my thoughts</textarea>
                 <figcaption class="flex items-center justify-between mt-1 space-x-3 rtl:space-x-reverse">
                     <div class="flex justify-between">
                       <img class="w-8 h-8  animate-bounce" src="images/heartColored.png" alt="heart">
@@ -380,14 +375,14 @@
           </div>
 
   
-          <div class="col-span-8 md:col-span-5 grid place-items-center">
+          <div id="galleryGrid" class="col-span-8 lg:col-span-5 grid">
             <div id="noImageDesign" class="col-span-auto">
               <dotlottie-player src="https://lottie.host/b57621be-96a7-4b8f-b8b0-4bc3d7572ec7/NzhUjeUtxj.lottie" background="transparent" speed="1" class="justify-center w-96 h-96" loop autoplay></dotlottie-player>
               <p class="font-semibold text-lg my-blue text-center align-center">No images yet. Go take some pictures in the VR!</p>
             </div>
 
 
-            <div id="selfTakenImagesContainer" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+            <div id="selfTakenImagesContainer" class="grid grid-cols-2 lg:grid-cols-3 gap-3"></div>
           </div>
         </div>
         <script type="module" src="jsFiles/profile.js"></script>
