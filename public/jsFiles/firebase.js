@@ -264,7 +264,7 @@ onAuthStateChanged(auth, (user) => {
 
         // Displays user thoughts in user profile     
         onValue(imageRef, (snapshot) => {
-            const galleryGrid = document.getElementById('galleryGrid'); // Gets the entire container that stores images and a design that shows when there are no photos 
+            const galleryGrid = document.getElementById('galleryGrid'); // Gets the entire container that stores images and a design that displays only when there are no photos 
             const noImageDesign = document.getElementById('noImageDesign'); // Gets the container that shows a design when there are no photos 
             const image = snapshot.val();
             document.getElementById("selfTakenImagesContainer").innerHTML = ``; // Clears the container that will stores images
@@ -359,7 +359,6 @@ export async function updateUserRankData(userId, data, updatedData) {
 export async function deleteAccount() {
     const userRef = ref(db, 'users/' + currentUserId);
     const authUser = auth.currentUser;
-
     try {
         // Use Promise.all to run both operations concurrently
         await Promise.all([
@@ -396,7 +395,7 @@ export async function insertImage(urlUpload) {
     updateData("userDetails", "profilePhoto", urlUpload);
 };
 
-// Displays the user thoughts
+// Displays the everyone's thoughts
 export async function loadThoughts() {
     get(ref(db, '/users'))
         .then((snapshot) => {
@@ -441,7 +440,7 @@ export async function loadThoughts() {
                             </div>
                         `;
                     }
-                    loadUserLikedPosts(); // Shows the posts that are liked by the current logged in user
+                    loadUserLikedPosts(); // Shows the pink hearts for posts that are liked by the current logged in user
                 });
 
                 setTimeout(() => { // Used setTimeout to defer Masonry initialization
@@ -532,13 +531,16 @@ export async function generateChart() {
     const top5Aura = query(usersRef, orderByChild('aura'), limitToLast(5));
     const top5ThoughtLikes = query(usersRef, orderByChild('thoughtLikes'), limitToLast(5));
 
+    // Variables to store online and offline users
     var totalUsers = 0;
     var totalOnlineUsers = 0;
 
+    // Variables to store aura distribution
     var usersBelowEqual500Aura = 0;
     var usersBelowEqual1000Aura = 0;
     var usersBelowEqual1500Aura = 0;
 
+    // Variables to store thought likes distribution
     var usersBelowEqual40ThoughtLikes = 0;
     var usersBelowEqual60ThoughtLikes = 0;
     var usersBelowEqual100ThoughtLikes = 0;

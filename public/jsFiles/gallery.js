@@ -15,7 +15,7 @@ async function getImages(bucketName, folderName ) {
     }
 
     const container = document.getElementById('image-container');
-    var counter=2; // Creates varied sizes
+    var counter=2; // Creates varied image sizes
     const filteredData = data.filter(file => !file.name.startsWith('.')); // Remove files that start with "."
 
     // Checks if there are any images

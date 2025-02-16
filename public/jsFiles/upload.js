@@ -10,7 +10,7 @@ document.getElementById("uploadButton").addEventListener("click", () =>uploadFil
 async function uploadFile() {
     const fileInput = document.getElementById('fileInput'); // Get the file element in the HTML 
     const file = fileInput.files[0]; // Get the first file that the user selected 
-    if (!file || file.size === 0) {  // If the user did not select a file 
+    if (!file || file.size === 0) {  // If the user did not select a file , there will be an alert
         alert('Please select a file.'); 
         return; 
     } 

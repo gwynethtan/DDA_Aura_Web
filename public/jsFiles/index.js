@@ -12,7 +12,7 @@ signUpButton.addEventListener("click", () =>signUp());
 const forgotPasswordButton = document.getElementById("forgotPasswordButton");
 forgotPasswordButton.addEventListener("click", () =>resetPassword());
 
-//Login and sign up form 
+//Reference to forms
 const loginForm = document.getElementById('loginForm');
 const signUpForm = document.getElementById('signUpForm');
 const forgotPasswordForm = document.getElementById('forgotPasswordForm');

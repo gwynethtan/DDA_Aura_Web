@@ -5,8 +5,7 @@ const supabaseAnonKey =
 const client = supabase.createClient(supabaseUrl, supabaseAnonKey);
 import { insertImage,currentUserId } from "./firebase.js";
 
-// Define the public url of the image
-let publicUrl = "";
+let publicUrl = ""; // Define the public url of the image
 
 // Get the webcam element
 const webcam = document.getElementById("webcam");
