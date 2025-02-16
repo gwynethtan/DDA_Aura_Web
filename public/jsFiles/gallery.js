@@ -1,5 +1,5 @@
-// Initialize Supabase client
-const supabaseUrl = 'https://qabrcgzafrzbwrtrezqc.supabase.co'; // Replace with your Supabase URL
+// Initialize supabase
+const supabaseUrl = 'https://qabrcgzafrzbwrtrezqc.supabase.co'; 
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFhYnJjZ3phZnJ6YndydHJlenFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzYzNTE1MjksImV4cCI6MjA1MTkyNzUyOX0.T7CTt9sVsRIg_zhrUokttmz_FDqeRT4Cocw9vDxqTfM'; // Replace with your Supabase anon key
 const supabaseData = supabase.createClient(supabaseUrl, supabaseAnonKey);
 

@@ -1,6 +1,7 @@
 import { rankData,generateChart } from "./firebase.js";
-const chartData = document.getElementById("chartData");
-const leaderboardData = document.getElementById("leaderboardData");
+
+const chartData = document.getElementById("chartData"); // Reference to the chart data content
+const leaderboardData = document.getElementById("leaderboardData"); // Reference to the leaderboard data content
 
 // Shows and hide content
 document.getElementById('sortAura').addEventListener('click', () => {
