@@ -72,6 +72,7 @@ export async function signUp() {
             window.location.href = "home.html"; // Go to home page
         })
         .catch((error) => {
+            console.log(error);
             const errorCode = error.code;
             // Shows error message for different cases 
             if (errorCode === 'auth/email-already-in-use') {
@@ -119,6 +120,7 @@ export async function logIn() {
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             alert("Login successful");
+            updateData("userDetails", "userOnline", true); 
             window.location.href = "home.html"; // Go to home page
         })
         .catch((error) => {
@@ -217,8 +219,6 @@ export async function logOut() {
 onAuthStateChanged(auth, (user) => {
     if (user) {
         currentUserId = user.uid;
-        updateData("userDetails", "userOnline", true);
-
         // Initialize references
         const rankRef = ref(db, 'users/' + currentUserId);
         const detailsRef = ref(db, 'users/' + currentUserId + '/userDetails');
@@ -359,19 +359,18 @@ export async function updateUserRankData(userId, data, updatedData) {
 export async function deleteAccount() {
     const userRef = ref(db, 'users/' + currentUserId);
     const authUser = auth.currentUser;
+    await remove(userRef) // Deletes account from the database side
+    .then(() => {
+        console.log("Account has been deleted on database side");
+        alert("Account has been deleted");
+        window.location.href = "index.html"; // Go to sign up page
+    })
+    .catch((error) => {
+        console.error("Error updating data:", error);
+    });
     await deleteUser(authUser) // Deletes account from the auth side
         .then(() => {
             console.log("Account has been deleted on auth side");
-        })
-        .catch((error) => {
-            console.error("Error updating data:", error);
-        });
-
-    await remove(userRef) // Deletes account from the database side
-        .then(() => {
-            console.log("Account has been deleted on database side");
-            alert("Account has been deleted");
-            window.location.href = "index.html"; // Go to sign up page
         })
         .catch((error) => {
             console.error("Error updating data:", error);
@@ -392,7 +391,7 @@ export async function deleteData(node, subNode, data) {
 
 // Insert image url into firebase
 export async function insertImage(urlUpload) {
-    alert('Profile picture is sucessfully uploaded');
+    alert('Profile picture has been uploaded');
     const accountPhoto = document.getElementById("accountPhoto");
     accountPhoto.src = urlUpload;
     updateData("userDetails", "profilePhoto", urlUpload);
