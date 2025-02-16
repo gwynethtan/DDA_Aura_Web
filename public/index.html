@@ -1,97 +1,91 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Beyond Borders</title>
-        <link rel="stylesheet" href="https://unpkg.com/normalize.css">
-        <link href="others/style.css" rel="stylesheet"/>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Poppins&display=swap" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.css" rel="stylesheet"/>
-    </head>
-    <body class="bg-gray-100 font-sans border-20 min-h-screen border-main">
-
-        <!-- Player Form Section -->
-        <div id="signUpForm" class="mx-auto pt-28 md:pt-20 px-10 md:px-80">
-            <img src="./images/beyondBorderLogo.png" class="h-10" alt="Beyond Borders Logo" />
-            <h2 class="poppins my-blue text-2xl font-bold mb-7 pt-10 md:pt-5">Sign up</h2>
-            <form class="space-y-4">
-                <div>
-                    <label for="username" class="font-semibold my-blue block text-lg font-medium">Username:</label>
-                    <input type="text" id="signUpUsername" name="username" class="bg-transparent w-full p-3 border-color rounded-md" required>
-                </div>
-                <div>
-                    <label for="email" class="font-semibold my-blue block text-lg font-medium">Email:</label>
-                    <input type="email" id="signUpEmail" name="email" class="bg-transparent w-full p-3 border-color rounded-md" required>
-                </div>
-                <div>
-                    <label for="password" class="font-semibold my-blue block text-lg font-medium">Password:</label>
-                    <input type="password" id="signUpPassword" name="password" class="bg-transparent w-full p-3 border-color rounded-md" required>
-                </div>
-                <div class="text-right mt-2"> <!-- Aligns the button to the right -->
-                    <button id="showForgotPasswordSignUp" type="button" class="underline my-blue">Forgot Password</button>
-                </div>
-                <button id="signUpButton" type="submit" class="w-full my-bg-pink my-white py-3 rounded-md">Sign up</button>
-                
-                <div class="items-center">
-                    <h2 class="inline text-2s font-normal my-blue">Already have an account? </h2>
-                    <button id="showLogIn" type="button" class="inline underline ml-2 my-blue center">Log in.</button>
-                </div>
-            </form>
-        </div>
-
-
-        <!-- Login Section -->
-        <div id="loginForm" class="mx-auto pt-28 md:pt-20 px-10 md:px-80">
-            <img src="./images/beyondBorderLogo.png" class="h-10" alt="Beyond Borders Logo" />
-            <h2 class="poppins my-blue text-2xl font-bold mb-7 pt-10 md:pt-5">Log In</h2>            
-            <form class="space-y-4">
-                <div>
-                    <label for="email" class="font-semibold my-blue block text-lg font-medium">Email:</label>
-                    <input type="email" id="logInEmail" name="email" class="bg-transparent w-full p-3 border-color rounded-md" required>
-                </div>
-                <div>
-                    <label for="password" class="font-semibold my-blue block text-lg font-medium">Password:</label>
-                    <input type="password" id="logInPassword" name="password" class="bg-transparent w-full p-3 border-color rounded-md" required>
-                </div>
-                <div class="text-right mt-2"> <!-- Aligns the button to the right -->
-                    <button id="showForgotPasswordLogIn" type="button" class="underline my-blue">Forgot Password</button>
-                </div>
-                <button id="logInButton" type="submit" class="w-full my-bg-pink my-white py-3 rounded-md">Log in</button>
-                
-                <div class="items-center">
-                    <h2 class="inline text-2s font-normal my-blue">Don't have an account? </h2>
-                    <button id="showSignUp" type="button" class="inline underline ml-2 my-blue center">Sign up.</button>
-                    
-                </div>
-            </form>
-        </div>
-
-
-        <!-- Player Form Section -->
-        <div id="forgotPasswordForm" class="mx-auto pt-28 md:pt-20 px-10 md:px-80">
-            <img src="./images/beyondBorderLogo.png" class="h-10" alt="Beyond Borders Logo" />
-            <h2 class="poppins my-blue text-2xl font-bold mb-7 pt-10 md:pt-5">Forgot Password</h2>
-            <div class="space-y-4">
-                <div>
-                    <label for="email" class="font-semibold my-blue block text-lg font-medium">Email:</label>
-                    <input type="email" id="forgotPasswordEmail" name="email" class="bg-transparent w-full p-3 border-color rounded-md" required>
-                </div>
-                <p class="font-medium my-blue">An email will be sent for you to change your password</p>
-                <button id="forgotPasswordButton" type="button" class="w-full my-bg-pink my-white py-3 rounded-md">Confirm email</button>
-                
-                <div class="items-center">
-                    <h2 class="inline text-2s font-normal my-blue">Remember your password? </h2>
-                    <button id="showLogInFromPassword" type="button" class="inline underline ml-2 my-blue center">Log in.</button>
-                </div>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>Beyond Borders</title>
+      <link rel="stylesheet" href="https://unpkg.com/normalize.css">
+      <link href="others/style.css" rel="stylesheet"/>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Poppins&display=swap" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.css" rel="stylesheet"/>
+   </head>
+   <body class="bg-gray-100 font-sans border-20 min-h-screen border-main">
+      <!-- Sign up fprm section -->
+      <div id="signUpForm" class="mx-auto pt-28 md:pt-20 px-10 md:px-80">
+         <img src="./images/beyondBorderLogo.png" class="h-10" alt="Beyond Borders Logo" />
+         <h2 class="poppins my-blue text-2xl font-bold mb-7 pt-10 md:pt-5">Sign up</h2>
+         <form class="space-y-4">
+            <div>
+               <label for="username" class="font-semibold my-blue block text-lg font-medium">Username:</label>
+               <input type="text" id="signUpUsername" name="username" class="bg-transparent w-full p-3 border-color rounded-md" required>
             </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-        <script src="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.js"></script>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script type="module" src="jsFiles/index.js"></script>
-    </body>
+            <div>
+               <label for="email" class="font-semibold my-blue block text-lg font-medium">Email:</label>
+               <input type="email" id="signUpEmail" name="email" class="bg-transparent w-full p-3 border-color rounded-md" required>
+            </div>
+            <div>
+               <label for="password" class="font-semibold my-blue block text-lg font-medium">Password:</label>
+               <input type="password" id="signUpPassword" name="password" class="bg-transparent w-full p-3 border-color rounded-md" required>
+            </div>
+            <div class="text-right mt-2">
+               <!-- Aligns the button to the right -->
+               <button id="showForgotPasswordSignUp" type="button" class="underline my-blue">Forgot Password</button>
+            </div>
+            <button id="signUpButton" type="submit" class="w-full my-bg-pink my-white py-3 rounded-md">Sign up</button>
+            <div class="items-center">
+               <h2 class="inline text-2s font-normal my-blue">Already have an account? </h2>
+               <button id="showLogIn" type="button" class="inline underline ml-2 my-blue center">Log in.</button>
+            </div>
+         </form>
+      </div>
+      <!-- Login form section -->
+      <div id="loginForm" class="mx-auto pt-28 md:pt-20 px-10 md:px-80">
+         <img src="./images/beyondBorderLogo.png" class="h-10" alt="Beyond Borders Logo" />
+         <h2 class="poppins my-blue text-2xl font-bold mb-7 pt-10 md:pt-5">Log In</h2>
+         <form class="space-y-4">
+            <div>
+               <label for="email" class="font-semibold my-blue block text-lg font-medium">Email:</label>
+               <input type="email" id="logInEmail" name="email" class="bg-transparent w-full p-3 border-color rounded-md" required>
+            </div>
+            <div>
+               <label for="password" class="font-semibold my-blue block text-lg font-medium">Password:</label>
+               <input type="password" id="logInPassword" name="password" class="bg-transparent w-full p-3 border-color rounded-md" required>
+            </div>
+            <div class="text-right mt-2">
+               <!-- Aligns the button to the right -->
+               <button id="showForgotPasswordLogIn" type="button" class="underline my-blue">Forgot Password</button>
+            </div>
+            <button id="logInButton" type="submit" class="w-full my-bg-pink my-white py-3 rounded-md">Log in</button>
+            <div class="items-center">
+               <h2 class="inline text-2s font-normal my-blue">Don't have an account? </h2>
+               <button id="showSignUp" type="button" class="inline underline ml-2 my-blue center">Sign up.</button>
+            </div>
+         </form>
+      </div>
+      <!-- Forgot password form Section -->
+      <div id="forgotPasswordForm" class="mx-auto pt-28 md:pt-20 px-10 md:px-80">
+         <img src="./images/beyondBorderLogo.png" class="h-10" alt="Beyond Borders Logo" />
+         <h2 class="poppins my-blue text-2xl font-bold mb-7 pt-10 md:pt-5">Forgot Password</h2>
+         <div class="space-y-4">
+            <div>
+               <label for="email" class="font-semibold my-blue block text-lg font-medium">Email:</label>
+               <input type="email" id="forgotPasswordEmail" name="email" class="bg-transparent w-full p-3 border-color rounded-md" required>
+            </div>
+            <p class="font-medium my-blue">An email will be sent for you to change your password</p>
+            <button id="forgotPasswordButton" type="button" class="w-full my-bg-pink my-white py-3 rounded-md">Confirm email</button>
+            <div class="items-center">
+               <h2 class="inline text-2s font-normal my-blue">Remember your password? </h2>
+               <button id="showLogInFromPassword" type="button" class="inline underline ml-2 my-blue center">Log in.</button>
+            </div>
+         </div>
+      </div>
+      <!-- Scripts --> 
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+      <script src="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.js"></script>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script type="module" src="jsFiles/index.js"></script>
+   </body>
 </html>

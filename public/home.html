@@ -1,263 +1,238 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Beyond Borders</title>
-    <link rel="stylesheet" href="https://unpkg.com/normalize.css">
-    <link href="others/style.css" rel="stylesheet"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Poppins&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.css" rel="stylesheet"/>
-  </head>
-    
-    <body class="bg-gray-100 font-sans">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>Beyond Borders</title>
+      <link rel="stylesheet" href="https://unpkg.com/normalize.css">
+      <link href="others/style.css" rel="stylesheet"/>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Poppins&display=swap" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.css" rel="stylesheet"/>
+   </head>
+   <body>
+      <!--Nav bar-->
       <nav class="fixed w-full border-gray-200 my-bg-white top-0 z-50">
-        <div class="max-w-screen-xl flex items-center justify-between mx-auto p-6">
-          <a href="home.html" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="./images/beyondBorderLogo.png" class="h-8" alt="Beyond Borders Logo" />
-          </a>
-      
-          <div class="flex items-center ml-auto space-x-4"> 
+         <div class="max-w-screen-xl flex items-center justify-between mx-auto p-6">
+         <a href="home.html" class="flex items-center space-x-3 rtl:space-x-reverse">
+         <img src="./images/beyondBorderLogo.png" class="h-8" alt="Beyond Borders Logo" />
+         </a>
+         <div class="flex items-center ml-auto space-x-4">
             <button
-              data-collapse-toggle="navbar-solid-bg"
-              type="button"
-              class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden"
-              aria-controls="navbar-solid-bg"
-              aria-expanded="false"
-            >
-              <span class="sr-only">Open main menu</span>
-              <svg
-                class="w-5 h-5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 17 14"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M1 1h15M1 7h15M1 13h15"
-                />
-              </svg>
+               data-collapse-toggle="navbar-solid-bg"
+               type="button"
+               class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden"
+               aria-controls="navbar-solid-bg"
+               aria-expanded="false"
+               >
+               <span class="sr-only">Open main menu</span>
+               <svg
+                  class="w-5 h-5"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 17 14"
+                  >
+                  <path
+                     stroke="currentColor"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     stroke-width="2"
+                     d="M1 1h15M1 7h15M1 13h15"
+                     />
+               </svg>
             </button>
-      
             <div class="hidden w-full md:flex md:w-auto" id="navbar-solid-bg">
-              <ul
-                class="flex flex-col font-medium mt-4 rounded-lg my-bg-grey md:space-x-6 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent "
-              >
-                <li>
-                  <a
-                    href="home.html"
-                    class="block font-bold py-2 px-3 md:p-0 my-pink rounded-sm md:bg-transparent md:my-pink"
-                    aria-current="page"
+               <ul
+                  class="flex flex-col font-medium mt-4 rounded-lg my-bg-grey md:space-x-6 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent "
                   >
-                    Home
-                  </a>
-                </li>
-                <li> 
-                  <a
-                    href="gallery.html"
-                    class="block font-bold py-2 px-3 md:p-0 my-blue page-hover md:my-blue rounded-sm md:hover:bg-transparent md:border-0"
-                  >
-                    Gallery
-                  </a>
-                </li>
-                <li> 
-                  <a
-                    href="thoughtBubble.html"
-                    class="block font-bold py-2 px-3 md:p-0 my-blue page-hover md:my-blue rounded-sm md:hover:bg-transparent md:border-0"
-                  >
-                    Thought Bubble
-                  </a>
-                </li>
-                <li> 
-                    <a
-                      href="profile.html"
-                      class="block font-bold py-2 px-3 md:p-0 my-blue page-hover md:my-blue rounded-sm md:hover:bg-transparent md:border-0"
-                    >
-                      Profile
-                    </a>
+                  <li>
+                     <a
+                        href="home.html"
+                        class="block font-bold py-2 px-3 md:p-0 my-pink rounded-sm md:bg-transparent md:my-pink"
+                        aria-current="page"
+                        >
+                     Home
+                     </a>
                   </li>
-              </ul>
+                  <li> 
+                     <a
+                        href="gallery.html"
+                        class="block font-bold py-2 px-3 md:p-0 my-blue page-hover md:my-blue rounded-sm md:hover:bg-transparent md:border-0"
+                        >
+                     Gallery
+                     </a>
+                  </li>
+                  <li> 
+                     <a
+                        href="thoughtBubble.html"
+                        class="block font-bold py-2 px-3 md:p-0 my-blue page-hover md:my-blue rounded-sm md:hover:bg-transparent md:border-0"
+                        >
+                     Thought Bubble
+                     </a>
+                  </li>
+                  <li> 
+                     <a
+                        href="profile.html"
+                        class="block font-bold py-2 px-3 md:p-0 my-blue page-hover md:my-blue rounded-sm md:hover:bg-transparent md:border-0"
+                        >
+                     Profile
+                     </a>
+                  </li>
+               </ul>
             </div>
-        </div>
+         </div>
       </nav>
-
-
+      <!-- Carousel -->
       <div id="default-carousel" class="relative w-full h-screen" data-carousel="slide">
-        <div class="absolute inset-0 bg-black/40 z-40"></div>
-
-        <!-- Carousel wrapper -->
-        <div class="z-40 absolute inset-0 flex flex-col items-center justify-center text-center p-12">
-          <p class="text-white text-6xl">Welcome to YEP</p>
-          <p class="text-white text-xl md:text-4xl">3 more months to go</p>
-        </div>
-        
-      
-
-
-        <div class="relative h-screen overflow-hidden rounded-lg md:h-screen">
-          <!-- Carousel items -->
-          <!-- Item 1 -->
-          <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="images/yepImg1.png" class="absolute block w-full h-full object-cover" alt="...">
-          </div>
-          <!-- Item 2 -->
-          <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="images/yepImg2.png" class="absolute block w-full h-full object-cover" alt="...">
-          </div>
-          <!-- Item 3 -->
-          <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="images/yepImg3.png" class="absolute block w-full h-full object-cover" alt="...">
-          </div>
-          <!-- Item 4 -->
-          <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="images/yepImg4.png" class="absolute block w-full h-full object-cover" alt="...">
-          </div>
-          <!-- Item 5 -->
-          <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="images/yepImg5.png" class="absolute block w-full h-full object-cover" alt="...">
-          </div>
-
-          
-          
-
-        </div>
-      
-        <!-- Slider indicators -->
-        <div class="absolute z-40 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-          <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-          <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-          <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-          <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-          <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
-        </div>
-      
-        <!-- Slider controls -->
-        <button type="button" class="absolute top-0 start-0 z-40 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-          <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-            </svg>
-            <span class="sr-only">Previous</span>
-          </span>
-        </button>
-        <button type="button" class="absolute top-0 end-0 z-40 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-          <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-            </svg>
-            <span class="sr-only">Next</span>
-          </span>
-        </button>
+         <div class="absolute inset-0 bg-black/40 z-40"></div>
+         <!-- Main text -->
+         <div class="z-40 absolute inset-0 flex flex-col items-center justify-center text-center p-12">
+            <p class="text-white text-6xl">Welcome to YEP</p>
+            <p class="text-white text-xl md:text-4xl">3 more months to go</p>
+         </div>
+         <!-- List of all images-->
+         <div class="relative h-screen overflow-hidden rounded-lg md:h-screen">
+            <!-- Item 1 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+               <img src="images/yepImg1.png" class="absolute block w-full h-full object-cover" alt="...">
+            </div>
+            <!-- Item 2 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+               <img src="images/yepImg2.png" class="absolute block w-full h-full object-cover" alt="...">
+            </div>
+            <!-- Item 3 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+               <img src="images/yepImg3.png" class="absolute block w-full h-full object-cover" alt="...">
+            </div>
+            <!-- Item 4 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+               <img src="images/yepImg4.png" class="absolute block w-full h-full object-cover" alt="...">
+            </div>
+            <!-- Item 5 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+               <img src="images/yepImg5.png" class="absolute block w-full h-full object-cover" alt="...">
+            </div>
+         </div>
+         <!-- Slider indicators -->
+         <div class="absolute z-40 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+         </div>
+         <!-- Slider controls -->
+         <button type="button" class="absolute top-0 start-0 z-40 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+               <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+               </svg>
+               <span class="sr-only">Previous</span>
+            </span>
+         </button>
+         <button type="button" class="absolute top-0 end-0 z-40 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+               <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+               </svg>
+               <span class="sr-only">Next</span>
+            </span>
+         </button>
       </div>
-
-
-
-
-
-        <!-- Header Section -->
-        <div class="my-bg-pink text-white py-8 text-center">
-            <h1 class="text-xl font-bold">Ranked data</h1>
-        </div>
-
-        <div class="mx-2 mb-10 md:mx-14 px-5 pt-10">
-          <div class="flex justify-between align-center">
+      <!-- Ranked data section header -->
+      <div class="my-bg-pink text-white py-8 text-center">
+         <h1 class="text-xl font-bold">Ranked data</h1>
+      </div>
+      <!-- Ranked data content-->
+      <div class="mx-2 mb-10 md:mx-14 px-5 pt-10">
+         <div class="flex justify-between align-center">
+            <!-- Type of data title -->
             <p id="dataTypeTitle" class="text-2xl font-bold my-blue">Users ranked by aura</p>
-
-
             <div>
-              <span class="inline-block font-bold text-3xl"></span>
-              <img
-              style="width: 30px; height: 30px;"
-              type="button"
-              data-dropdown-toggle="filterDropdown"
-              data-dropdown-placement="bottom-start"
-              class="inline-block ml-6 rounded-full cursor-pointer z-1000 mt-1"
-              src="images/filter.png"
-              alt="Filter data"
-              />
-
-              <div id="filterDropdown" class="z-10 hidden drop-shadow-lg my-bg-grey divide-y divide-gray-100 rounded-lg shadow-sm w-44">
-                <ul
-                  class="py-2 text-sm text-gray-700"
-                  aria-labelledby="photoButton"
-                >
-                  <li class="block font-semibold my-blue px-4 py-2 dropdown-hover"> 
-                      <button id="sortAura" type="button">
+               <span class="inline-block font-bold text-3xl"></span>
+               <img
+                  style="width: 30px; height: 30px;"
+                  type="button"
+                  data-dropdown-toggle="filterDropdown"
+                  data-dropdown-placement="bottom-start"
+                  class="inline-block ml-6 rounded-full cursor-pointer z-1000 mt-1"
+                  src="images/filter.png"
+                  alt="Filter data"
+                  />
+               <!-- Filter dropdown options-->
+               <div id="filterDropdown" class="z-10 hidden drop-shadow-lg my-bg-grey divide-y divide-gray-100 rounded-lg shadow-sm w-44">
+                  <ul
+                     class="py-2 text-sm text-gray-700"
+                     aria-labelledby="photoButton"
+                     >
+                     <li class="block font-semibold my-blue px-4 py-2 dropdown-hover"> 
+                        <button id="sortAura" type="button">
                         Filter by Aura
-                      </button>
-                  </li>
-                  <li class="block font-semibold my-blue px-4 py-2 dropdown-hover"> 
-                      <button id="sortLikes" type="button">
-                          Filter by Likes
-                      </button>
-                  </li>
-                  <li class="block font-semibold my-blue px-4 py-2 dropdown-hover"> 
-                    <button id="seeCharts"type="button">
+                        </button>
+                     </li>
+                     <li class="block font-semibold my-blue px-4 py-2 dropdown-hover"> 
+                        <button id="sortLikes" type="button">
+                        Filter by Likes
+                        </button>
+                     </li>
+                     <li class="block font-semibold my-blue px-4 py-2 dropdown-hover"> 
+                        <button id="seeCharts"type="button">
                         See Charts
-                    </button>
-                  </li>
-                </ul>
-              </div>
+                        </button>
+                     </li>
+                  </ul>
+               </div>
             </div>
-          </div>
-
-
-
-
-
-          <div class="pt-3">
+         </div>
+         <div class="pt-3">
+            <!-- Stores chart data-->
             <div id="chartData" class="grid grid-cols-6 gap-4 hidden">
-              <div class="col-span-6 md:col-span-3 flex flex-col items-center">
-                <h1>Top 5 aura</h1>
-                <div id="no-data"></div>
-                <canvas id="top5AuraCanvas"></canvas>
+               <div class="col-span-6 md:col-span-3 flex flex-col items-center">
+                  <h1>Top 5 aura</h1>
+                  <div id="no-data"></div>
+                  <canvas id="top5AuraCanvas"></canvas>
+               </div>
+               <div class="col-span-6 md:col-span-3 flex flex-col items-center">
+                  <h1>Top 5 likes</h1>
+                  <div id="no-data"></div>
+                  <canvas id="top5ThoughtLikesCanvas"></canvas>
+               </div>
+               <div class="col-span-6 md:col-span-2 flex flex-col items-center">
+                  <h1>Aura distribution</h1>
+                  <div id="no-data"></div>
+                  <canvas id="auraDistributionCanvas"></canvas>
+               </div>
+               <div class="col-span-6 md:col-span-2 flex flex-col items-center">
+                  <h1>Thought likes distribution</h1>
+                  <div id="no-data"></div>
+                  <canvas id="thoughtLikesDistributionCanvas"></canvas>
+               </div>
+               <div class="col-span-6 md:col-span-2 flex flex-col items-center">
+                  <h1 class="flex self-center">Number of users online</h1>
+                  <div id="no-data"></div>
+                  <canvas id="onlineCanvas"></canvas>
+               </div>
             </div>
-            <div class="col-span-6 md:col-span-3 flex flex-col items-center">
-              <h1>Top 5 likes</h1>
-              <div id="no-data"></div>
-              <canvas id="top5ThoughtLikesCanvas"></canvas>
-            </div>
-            <div class="col-span-6 md:col-span-2 flex flex-col items-center">
-              <h1>Aura distribution</h1>
-              <div id="no-data"></div>
-              <canvas id="auraDistributionCanvas"></canvas>
-            </div>
-            <div class="col-span-6 md:col-span-2 flex flex-col items-center">
-              <h1>Thought likes distribution</h1>
-              <div id="no-data"></div>
-              <canvas id="thoughtLikesDistributionCanvas"></canvas>
-            </div>
-            <div class="col-span-6 md:col-span-2 flex flex-col items-center">
-              <h1 class="flex self-center">Number of users online</h1>
-              <div id="no-data"></div>
-              <canvas id="onlineCanvas"></canvas>
-            </div>
-            
-            </div>
-    
-    
+            <!-- Stores leaderboard data -->
             <div id="leaderboardData">
-              <!-- Header Row -->
-              <div class="grid grid-cols-6 gap-2 px-4 py-2 font-semibold border rounded-lg my-bg-blue my-white">
-                <div class="text-left">Rank</div>
-                <div class="text-left col-span-3">Username</div>
-                <div class="text-left">Aura</div>
-                <div class="text-left">Likes</div>
-              </div>
-              <div id="rankContainer"></div>
+               <!-- Header Row -->
+               <div class="grid grid-cols-6 gap-2 px-4 py-2 font-semibold border rounded-lg my-bg-blue my-white">
+                  <div class="text-left">Rank</div>
+                  <div class="text-left col-span-3">Username</div>
+                  <div class="text-left">Aura</div>
+                  <div class="text-left">Likes</div>
+               </div>
+               <div id="rankContainer"></div>
             </div>
-          </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-        <script src="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.js"></script>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script type="module" src="jsFiles/home.js"></script>
-    </body>
+         </div>
+      </div>
+      <!-- Scripts -->
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+      <script src="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.js"></script>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script type="module" src="jsFiles/home.js"></script>
+   </body>
 </html>
