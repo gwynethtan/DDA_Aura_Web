@@ -64,7 +64,7 @@ async function capturePhoto() {
     const filePath = `profilePhotos/${currentUserId}`; // Path to store the file in the profilePhoto folder
  
     try { 
-        // Upload to Supabase Storage       
+      // Upload to Supabase Storage       
       const { data, error } = await client.storage // Updates the photo image in Supabase for the photo which has the same file path
       .from('images')
       .update(filePath, blob, {

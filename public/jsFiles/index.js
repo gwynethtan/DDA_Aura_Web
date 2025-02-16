@@ -1,14 +1,14 @@
 import { signUp, logIn,resetPassword } from "./firebase.js";
 
-// When the capture button is clicked, call capturePhoto() function
+// When the login button is clicked, call logIn() function
 const logInButton = document.getElementById("logInButton");
 logInButton.addEventListener("click", () =>logIn());
 
-// When the capture button is clicked, call capturePhoto() function
+// When the sign up button is clicked, call signUp() function
 const signUpButton = document.getElementById("signUpButton");
 signUpButton.addEventListener("click", () =>signUp());
 
-// When the capture button is clicked, call capturePhoto() function
+// When the forgot password button is clicked, call resetPassword() function
 const forgotPasswordButton = document.getElementById("forgotPasswordButton");
 forgotPasswordButton.addEventListener("click", () =>resetPassword());
 
@@ -16,38 +16,41 @@ forgotPasswordButton.addEventListener("click", () =>resetPassword());
 const loginForm = document.getElementById('loginForm');
 const signUpForm = document.getElementById('signUpForm');
 const forgotPasswordForm = document.getElementById('forgotPasswordForm');
-loginForm.style.display = "none"; // Show
-signUpForm.style.display = "block"; // Hide
-forgotPasswordForm.style.display = "none"; // Hide
 
+// Display sign up form first
+loginForm.style.display = "none"; 
+signUpForm.style.display = "block"; 
+forgotPasswordForm.style.display = "none"; 
+
+// Shows and hide content
 document.getElementById('showLogIn').addEventListener('click', () => {
     console.log("Login showing");
-    loginForm.style.display = "block"; // Show
-    signUpForm.style.display = "none"; // Hide
-    forgotPasswordForm.style.display = "none"; // Hide
+    loginForm.style.display = "block"; 
+    signUpForm.style.display = "none"; 
+    forgotPasswordForm.style.display = "none"; 
 });
 
 document.getElementById('showLogInFromPassword').addEventListener('click', () => {
     console.log("Login showing");
-    loginForm.style.display = "block"; // Show
-    signUpForm.style.display = "none"; // Hide
-    forgotPasswordForm.style.display = "none"; // Hide
+    loginForm.style.display = "block"; 
+    signUpForm.style.display = "none"; 
+    forgotPasswordForm.style.display = "none"; 
 });
 document.getElementById('showSignUp').addEventListener('click', () => {
     console.log("SignUp showing");
-    loginForm.style.display = "none"; // Show
-    signUpForm.style.display = "block"; // Hide
-    forgotPasswordForm.style.display = "none"; // Hide
+    loginForm.style.display = "none"; 
+    signUpForm.style.display = "block";
+    forgotPasswordForm.style.display = "none"; 
 });
 document.getElementById('showForgotPasswordSignUp').addEventListener('click', () => {
     console.log("Forgot password showing");
-    loginForm.style.display = "none"; // Show
-    signUpForm.style.display = "none"; // Hide
-    forgotPasswordForm.style.display = "block"; // Hide
+    loginForm.style.display = "none"; 
+    signUpForm.style.display = "none"; 
+    forgotPasswordForm.style.display = "block"; 
 });
 document.getElementById('showForgotPasswordLogIn').addEventListener('click', () => {
     console.log("Forgot password showing");
-    loginForm.style.display = "none"; // Show
-    signUpForm.style.display = "none"; // Hide
-    forgotPasswordForm.style.display = "block"; // Hide
+    loginForm.style.display = "none"; 
+    signUpForm.style.display = "none"; 
+    forgotPasswordForm.style.display = "block"; 
 });
