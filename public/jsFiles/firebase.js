@@ -359,23 +359,22 @@ export async function updateUserRankData(userId, data, updatedData) {
 export async function deleteAccount() {
     const userRef = ref(db, 'users/' + currentUserId);
     const authUser = auth.currentUser;
-    await remove(userRef) // Deletes account from the database side
-    .then(() => {
-        console.log("Account has been deleted on database side");
+
+    try {
+        // Use Promise.all to run both operations concurrently
+        await Promise.all([
+            remove(userRef), // Deletes account from the database side
+            deleteUser(authUser) // Deletes account from the auth side
+        ]);
+
+        console.log("Account has been deleted from both database and auth side");
         alert("Account has been deleted");
         window.location.href = "index.html"; // Go to sign up page
-    })
-    .catch((error) => {
-        console.error("Error updating data:", error);
-    });
-    await deleteUser(authUser) // Deletes account from the auth side
-        .then(() => {
-            console.log("Account has been deleted on auth side");
-        })
-        .catch((error) => {
-            console.error("Error updating data:", error);
-        });
+    } catch (error) {
+        console.error("Error deleting account:", error);
+    }
 }
+
 
 // Deletes data that are under a node and sub-node for the current logged in user
 export async function deleteData(node, subNode, data) {
